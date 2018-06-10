@@ -11,21 +11,55 @@ $color-text-light: #eee; //Custom variable grey
 
 $width-button: 150px;
 
-nav {
-    margin: 30px;
-    background-color: $color-primary;
+/*
+    A mixin is a reusable bit of css code. For example, the clearfix
+    mixin can now be declared as below and simply referenced everywhere
+    that is required. This avoids having to write out the clearfix selector
+    in every element. A simple reference will no suffice.
+
+    To use a mixin, enter where required (see line 62):
+        @include myMixin;
+
+    Remember a mixin must be defined in a sass/less file before it can
+    be used. If the mixin is declared at line 10 and used at line 5, it
+    will not work.
+ */
+@mixin clearfixmixin {
 
     /*
         Typically the clearfix hack is used when a 'floating' element is
         taller than the element containing it. You can then specify
         'overflow:auto' to the containing element to fix this.
 
-        See line 67 for reasoning behind usage of '&'.
+        (See line 105 for reasoning behind usage of '&').
     */
     &.clearfix {
         content: "";
         overflow: auto;
     }
+}
+
+/*
+    It is also possible to pass arguments into a mixin. The mixin can
+    then use the passed in variable. This is useful when trying to
+    remove duplicate css code but vary slightly. In cases such as this
+    the user of the mixin can provide the differing values while the mixin
+    keeps the bulk of the code the same.
+
+    Below is an example of a mixin that takes in a single parameter.
+    (See lines 121 and 151 for usages).
+ */
+@mixin style-link-text($color) {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: $color; //using the passed in argument.
+}   
+
+nav {
+    margin: 30px;
+    background-color: $color-primary;
+
+    @include clearfixmixin; //usage of a mixin
 }
 
 /*
@@ -83,9 +117,8 @@ nav {
         }
 
         a {
-            text-decoration: none;
-            text-transform: uppercase;
-            color: $color-text-dark;
+            //use a mixin and pass in the color to be used
+            @include style-link-text($color-text-dark);
         }
     }
 }
@@ -94,15 +127,28 @@ nav {
     float: right;
 }
 
+/*
+    Example of a function. It is similar to a mixin in that it takes
+    any number of arguments. However the function returns a value.
+    The function below simply divides the two passed in arguments. Its
+    usage could be to return the length etc, in this case in pixels.
+
+    Remember a function must be defined in a sass/less file before it can
+    be used. If the function is declared at line 10 and used at line 5, it
+    will not work.
+ */
+@function divide($a, $b) {
+    @return ($a / $b) * 1px; //need to multiply by 1px in order to convert units to pixels
+}
+
 .btn-main, .btn-hot {
     padding: 10px;
     display: inline-block;
     text-align: center;
-    border-radius: 100px;
-    text-decoration: none;
-    text-transform: uppercase;
+    border-radius: divide(1000, 10);
     width: $width-button;
-    color: $color-text-light;
+
+    @include style-link-text($color-text-light);
 }
 
 .btn-main {
@@ -129,3 +175,40 @@ nav {
     }
 }
 
+/*
+    Extends is a way of inheriting declarations to be reused.
+    Extends are defined using '%' and below we have declared
+    a 'btn-placeholder' extend.
+
+    extends are different to mixins though they may appear the same.
+    The difference is that in the compiled css code, a mixin will
+    copy its contents into the selectors that use the mixin.
+    However, the extends have opposite affect. For extends, the
+    compiled css code substitutes the extend with the selector.
+
+    In the extends case below, the css compiled code would be:
+        .btn-main:after, .btn-main:before {
+            padding: 10px;
+            display: inline-block;
+        }
+     Notice both selectors that use the extend have taken the place
+     of the extend.
+
+     Important: Use extends only when sharing code amongst RELATED
+     selectors/elements.
+ */
+%btn-placeholder {
+    padding: 10px;
+    display: inline-block;
+}
+
+.btn-main:after {
+    //By using the 'btn-placeholder' extend this selector
+    //inherits the declared properties defined in the extend
+    //i.e. padding: 10px, display: inline-block
+    @extend %btn-placeholder;
+}
+
+.btn-main:before {
+    @extend %btn-placeholder;
+}

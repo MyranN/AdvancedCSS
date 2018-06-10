@@ -3,6 +3,29 @@
   padding: 0;
 }
 
+/*
+    A mixin is a reusable bit of css code. For example, the clearfix
+    mixin can now be declared as below and simply referenced everywhere
+    that is required. This avoids having to write out the clearfix selector
+    in every element. A simple reference will no suffice.
+
+    To use a mixin, enter where required (see line 62):
+        @include myMixin;
+
+    Remember a mixin must be defined in a sass/less file before it can
+    be used. If the mixin is declared at line 10 and used at line 5, it
+    will not work.
+ */
+/*
+    It is also possible to pass arguments into a mixin. The mixin can
+    then use the passed in variable. This is useful when trying to
+    remove duplicate css code but vary slightly. In cases such as this
+    the user of the mixin can provide the differing values while the mixin
+    keeps the bulk of the code the same.
+
+    Below is an example of a mixin that takes in a single parameter.
+    (See lines 121 and 151 for usages).
+ */
 nav {
   margin: 30px;
   background-color: #f9ed69;
@@ -11,7 +34,7 @@ nav {
           taller than the element containing it. You can then specify
           'overflow:auto' to the containing element to fix this.
   
-          See line 67 for reasoning behind usage of '&'.
+          (See line 105 for reasoning behind usage of '&').
       */
 }
 nav.clearfix {
@@ -79,14 +102,24 @@ nav.clearfix {
   float: right;
 }
 
+/*
+    Example of a function. It is similar to a mixin in that it takes
+    any number of arguments. However the function returns a value.
+    The function below simply divides the two passed in arguments. Its
+    usage could be to return the length etc, in this case in pixels.
+
+    Remember a function must be defined in a sass/less file before it can
+    be used. If the function is declared at line 10 and used at line 5, it
+    will not work.
+ */
 .btn-main, .btn-hot {
   padding: 10px;
   display: inline-block;
   text-align: center;
   border-radius: 100px;
+  width: 150px;
   text-decoration: none;
   text-transform: uppercase;
-  width: 150px;
   color: #eee;
 }
 
@@ -102,6 +135,33 @@ nav.clearfix {
 }
 .btn-hot:hover {
   background-color: #d16f8a;
+}
+
+/*
+    Extends is a way of inheriting declarations to be reused.
+    Extends are defined using '%' and below we have declared
+    a 'btn-placeholder' extend.
+
+    extends are different to mixins though they may appear the same.
+    The difference is that in the compiled css code, a mixin will
+    copy its contents into the selectors that use the mixin.
+    However, the extends have opposite affect. For extends, the
+    compiled css code substitutes the extend with the selector.
+
+    In the extends case below, the css compiled code would be:
+        .btn-main:after, .btn-main:before {
+            padding: 10px;
+            display: inline-block;
+        }
+     Notice both selectors that use the extend have taken the place
+     of the extend.
+
+     Important: Use extends only when sharing code amongst RELATED
+     selectors/elements.
+ */
+.btn-main:before, .btn-main:after {
+  padding: 10px;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=style.css.map */
