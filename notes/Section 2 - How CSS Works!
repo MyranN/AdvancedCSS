@@ -1,0 +1,315 @@
+Section 2:
+----------
+
+What are the 3 pillars of good websites?
+-------------------------------------------
+    1. Responsive Design
+    2. Maintainable and Scalable Code
+    3. Web Performance
+
+What happens when a browser loads a webpage?
+--------------------------------------------
+The browser first loads the html page and parses it line by line creating a DOM.
+The DOM models the page as a tree of parent and child nodes.
+
+When the html is parsed, the CSS files are also identified and loaded. The CSS
+file is then parsed. This process is handled in two parts:
+    1. Resolve conflicting CSS declarations. This is known as the 'cascade'.
+    2. Process final CSS values. E.g. converting margin percentage units to
+       pixels. The percentage units can only be converted based on the users
+       device. E.g. 50% of a mobile view is smaller than a desktop monitor.
+
+The parsed CSS produces a CSS Object Model (CSSOM) like a DOM. It too is a tree
+structure.
+
+The two models (DOM, CSSOM) form the final model called the Render tree. The
+browser then uses the 'Visual Formatting Model' to render the website.
+
+How is CSS parsed Part 1 (Conflict Resolution)?
+-----------------------------------------------
+A CSS rule is defined by a selector (e.g. '.my-class', 'my-element') and a
+declaration block. The declaration block sets the property values. E.g.
+    .my-class          <-selector
+    {                  <-declaration block
+        color: blue;
+        font-size: 20px;
+    }
+
+Cascade is the process of combining different stylesheets and resolving
+conflicts between different CSS rules and declarations, when more than one
+rule applies to a certain element.
+
+There are 3 CSS sources:
+    1. Author  - These are CSS files created by the developer
+    2. User    - These are CSS settings set by the user. E.g. a different font
+                 size is selected in the browser settings that is not the default.
+    3. Browser - These are default CSS settings set by the browser. E.g. blue
+                 underlined text for links.
+
+The cascade process takes files from these 3 sources and any conflicts are
+resolved based on the following criteria in the following order:
+    1. 'Importance'   - Importance is based on the source of the CSS declarations.
+                        The order of precedence based on source is as follows:
+                            A. User !Important declarations
+                            B. Author !Important declaration
+                            C. Author declarations
+                            D. User declarations
+                            E. Default browser declarations.
+
+                        Example of an 'important' declarations.
+                            .button {
+                                color: white !important;
+                             }
+    2. 'Specificity'  - If the importance of conflicting CSS declarations is
+                        the same, then specificity determines precedence. The
+                        order of specificity is as follows:
+                            A. Inline styles
+                            B. IDs
+                            C. Classes, Pseudo-classes, Attributes
+                            D. Elements, Pseudo-elements
+
+                        Each selector defined is then scored based on the above
+                        or each occurrence of a specificity.
+                        Example of a specificity score.
+                            #nav div.pull-right .button {
+                                //some declaration
+                            }
+                         Based on the above, we see the selector has 2 Classes,
+                         1 ID and 1 Element so is scored.
+                         (Inline: 0, ID: 1, Classes: 2, Elements: 1)
+                         Note if there was another specificity score with an Inline
+                         value of 1, it would take precedence over the above.
+    3. 'Source Order' - If the specificity and the importance is equal for a
+                        conflict. Then the last declaration in the code will
+                        override all other declarations.
+
+The universal selector '*' has no specificity, i.e. (Inline:0, ID:0, Classes:0 etc.)
+This means all other selectors have precedence over it.
+
+Rely more on specificity than on the order of selectors. Rely on order when
+using 3rd-party stylesheets as you must place Author stylesheets last so that
+they can override 3rd party stylesheets.
+
+It's important to know the above rules because you could define a pseudo-class like
+'hover' and the CSS declarations may not be applied if another selector takes precedence.
+E.g.
+    #nav div.pull-right a.button { <-Selector A
+        color: blue;
+    }
+
+    #nav a.button:hover { <- Selector B
+        color: red; <- hover CSS does not get applied because Selector A
+                       takes precedence with a higher specificity score.
+    }
+
+How is CSS parsed Part 2 (Value Processing)?
+--------------------------------------------
+CSS processing involves first converting declared values or declarations into
+cascaded values as described in part 1, i.e. resolving conflicts. If a cascaded
+value is not provided, then 'Specified Values' are used, these are default values.
+The values are converted into 'Computed Values' which involve converting
+relative values into absolute values (pixels) so they can be inherited. CSS keywords
+like 'auto', 'orange' etc. are replaced in this step. Finally there is the Used
+Values are calculated. This step uses the layout of the view to calculate remaining
+values. Finally, the Used Values are rounded to Actual Values that can be used. E.g.
+184.8px isn't something that can be viewed, so this value is rounded to 185px.
+
+The order is below:
+    1. Declared Value  - e.g. width: 66%, width: 140px
+    2. Cascaded Value  - e.g. width: 66% (conflict resolved, discard 140px)
+    3. Specified Value - e.g. width: 66% (cascaded value present so ignore default)
+    4. Computed Value  - e.g. width: 66% (pct is a measurement, doesn't require
+                         conversion)
+    5. Used Value      - e.g. width: 184.8px (conversion takes place. 66% of some
+                         parent element with width: 280px)
+    6. Actual Value    - e.g. width: 185px (184.8 can't be represented, so the value
+                         is rounded)
+
+The 'Specified Value' is the default value of a CSS property initialised by CSS.
+E.g. The padding property is defaulted to 0px if not declared by the author/browser.
+
+Aside: rem is a unit of measurement for font-sizes and is always relative to the
+       root element. For example, if the root element had a font-size of 16px and
+       a subelement had a font-size of 1.5rem, then the subelement font-size would
+       be 1.5 * 16px to give 24px.
+
+Aside2: Certain properties are inherited, particularly those related to text such
+        as font-size but also margins, padding etc. This means values of properties
+        declared in a parent element will be applied to a child element unless the
+        property is overridden by the child.
+
+When converting from Computed Values to Used Values units are converted from relative
+to absolute units (pixels). The conversions are shown below with examples where the
+start is the Computed Value, the middle is the conversion calculation and the end
+is the User Value, all separated by |.
+
+                   Property Examples        Computed                  Conversion                  Used
+              |------------------------|----------------|---------------------------------------|------|
+% for fonts:  |font-size               | font-size: 10% | 40% * parent font-size(240px)         | 24px |
+% for length: |margin, height, padding | padding: 10%   | 10% * parent WIDTH(50px)              | 5px  |
+em for font:  |font-size               | font-size: 3em | 3em * parent font-size(24px)          | 72px |
+em for length:|padding, margin, width  | padding: 2em   | 2em * current element font-size (24px)| 48px |
+rem           |padding, font-size      | margin: 10rem  | 10rem * root element font-size (5px)  | 50px |
+vh            |height                  | height: 90vh   | 90% * current viewport height (100px) | 90px |
+vw            |width                   | width: 80vw    | 80% * current viewport width (100px)  | 80px |
+
+Some notes based on the table above:
+    1. It is worth noting that percentages for length properties are always relative
+       to the parent WIDTH. I.e if the padding is 10% in a child element, the Used
+       Value is 10% of the PARENT WIDTH. If the height is 10%, it is still 10% of the
+       PARENT WIDTH.
+    2. em/rem are font based measurements and are relative to font-sizes. This is
+       useful because if the font-size is changed, the view is adjusted accordingly.
+    3. rem works the same for both font and length measurements. I.e. it is always
+       relative to the root elements font-size.
+    4. root font-sizes are specified by the browser, usually 16px
+    5. vh/vw are viewport based measurements. We don't know what the viewport height
+       /width is but the browser does and CSS uses these values when calculating
+       Used Values.
+
+Inheritance is a way of propagating a parent property value to a child. Every CSS
+property must have a value even if we don't declare one. The following flow diagram
+shows the steps taken.
+
+    Q. Is there a cascaded value?
+        --> YES -> A. Specified Value = Cascaded Value
+        --> NO  -> Q. Is the property inherited (some properties can't be inherited)?
+                        --> YES -> A. Specified Value = Parent Computed Value
+                        --> NO  -> A. Specified Value = Initial Default Value
+
+Some additional points on inheritance:
+    1. The computed value of a property is what gets inherited, not the declared
+       value.
+    2. Inheritance of a property only works if no one declares a value for that
+       property in the child element.
+    3. Properties related to text are inherited font-family, font-size, color etc.
+    4. The 'inherit' keyword can be used to force inheritance of a property
+    5. The 'initial' keyword resets a property to its initial value.
+
+What is the Visual Formatting Model?
+--------------------------------------------
+It is an algorithm that calculates boxes and determines the layout of these boxes
+for each element in the render tree (see section at very top for website flow) in
+order to determine the final layout of the page.
+The algorithm uses the following properties of an element to determine the box layout:
+    1. Dimensions of boxes: the box model
+    2. Box type           : inline, block, inline-block
+    3. Positioning scheme : floats and absolute/relative positioning
+    4. Stacking contexts  :
+    5. Other elements     : other elements in the render tree
+    6. External values    : Viewport size, dimensions of images etc.
+
+Box Models
+The box model is fundamental to the layout of a web page. Each and every element can be
+seen as a rectangular box. Each box has height/width. This forms the inner box.
+Padding then adds a pixel length to this inner boc in the chosen directions. Lets call
+this outer box, the padded box. Borders are applied to the padded box. Finally margin
+adds a final pixel length to the padded box in all the chosen directions. This forms
+the outer most box. See below for portion of box. Padding and margin are optional
+leaving just the inner box.
+ ____________________________________________
+| Margin box (outer most)
+|
+|           _______________________
+|          | Padded box (middle)
+|          |            __________
+|          |<-padding->| inner box/content box (inner most)
+|          |           | based on height/width
+|<-margin->|           | holds the content of the element
+|          |           |
+|          |           |__________
+|          |
+|          |_____________________border applied to padded box (this adds border thickness
+|                                on top of padding)
+|
+|_______________________________
+
+The margin specifies the space between two padded/inner box.
+The fill area that gets filled with a background color or image is the padded box.
+If there is no padding, then the fill area applies just to the inner box.
+
+The total width = right border + right padding + width + left padding + left border
+The total height = top border + top padding + height + bottom padding + bottom border
+
+By setting the box-sizing property to be 'border-box', the width and height of the box
+now includes the border and padding. Otherwise the width and height correspond only to
+the inner box width/height.
+
+Box Types
+Block level elements are formatted visually as blocks. They take up 100% of the parent
+width and add a line break at the end so vertically they are one after the other. The
+'display' property has 4 values that create block level boxes. These are:
+    1. display: block
+    2. display: flex
+    3. display: list-item
+    4. display: table
+<div> and <p> are set to 'block' by default.
+
+Inline elements are the opposite of blocks. The boxes are laid out one after the other
+flowing onto new lines if necessary. The inline box only occupies the content's space
+and there are no line breaks. There are also no height and width properties on inline
+elements. Padding and margins only apply to the left and right of the element.
+
+Inline-block level elements are a mix of block and inline elements. They only occupy
+the content's space. There are no line breaks and the box model shown in the diagram
+above applies.
+
+Positioning Schemes
+There are 3 positioning schemes. These are:
+    1. Normal flow (relative): This is the default positioning scheme. It's not floated
+                               and not absolutely positioned. Elements are laid out
+                               according to their source order.
+                               The setting for normal flow is: { position: relative; }
+    2. Floats                : Floating elements are removed from the normal flow and
+                               moved as far right or far left as possible until it
+                               touches the edge of its containing box or another floated
+                               element.
+                               Text and inline elements wrap around the floated element.
+                               A container will not adjust its height to the element.
+                               The setting for floats is: { float: left/right; }
+    3. Absolute Positioning  : The element is removed from the normal flow. However, unlike
+                               floats, there is no impact on surrounding elements/content.
+                               We use top, bottom, left and right to offset the element
+                               from its 'relative' positioned container.
+                               The setting for absolute is: { position: absolute/fixed; }
+
+Stacking Contexts
+Stacking contexts determine in which order elements are rendered on a web page. The
+most common property to configure this is the 'z-index' property. The lower the 'z-index'
+the lower down in the stack the element is. A z-index of -1 pushes the element to the bottom
+of the stack when rendering. Anything higher gets rendered on top.
+Opacity, transforms etc can also create stacking contexts, not just the z-index. That's
+why sometimes changing the z-index does not behave as expected.
+
+How to structure your web page?
+--------------------------------------------------
+The best structure is to use component-driven design. Where components are reusable
+between different project and are independent of their parent container allowing them
+to be used anywhere on the page.
+
+When building CSS files, the BEM methodology is useful. BEM stands for Block Element
+Modifier.
+    1. BLOCK   : The Block part of BEM refers to standalone elements that can be used
+                 anywhere in the project, such as a button etc. Blocks can be nested
+                 inside other blocks, this is perfectly normal.
+    2. ELEMENT : Elements are parts of the block that have no standalone meaning.
+    3. MODIFIER: A modifier is a flag added to a block or element to make it different
+                 from other blocks/elements. E.g. there could be a standard button but
+                 then we use a modifier to make a specific button.
+
+The equivalent CSS for BEM follows the naming format shown below:
+    .block: {}
+    .block__element: {}
+    .block__element--modifier: {}
+
+When architecting CSS files and folders use the 7-1 pattern where there are 7 different
+folders for partial CSS pre-processing files such as Sass or Less. And there is 1 main
+file to import the other 7 into a compiled CSS stylesheet. Hence 7-1. The 7 folder are
+as follows:
+    1. base/
+    2. components/
+    3. layout/
+    4. pages/
+    5. themes/
+    6. abstracts/
+    7. vendors/
