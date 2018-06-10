@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+$color-primary: #f9ed69; //Custom variable yellow
+$color-secondary: #f08a5d; //Custom variable orange
+$color-tertiary: #b83b5e; //Custom variable pink
+$color-text-dark: #333; //Custom variable grey
+$color-text-light: #eee; //Custom variable grey
+
+$width-button: 150px;
+
+nav {
+    margin: 30px;
+    background-color: $color-primary;
+
+    /*
+        Typically the clearfix hack is used when a 'floating' element is
+        taller than the element containing it. You can then specify
+        'overflow:auto' to the containing element to fix this.
+
+        See line 67 for reasoning behind usage of '&'.
+    */
+    &.clearfix {
+        content: "";
+        overflow: auto;
+    }
+}
+
+/*
+    Without Sass, in order to style the list items in an element
+    a new selector would be needed. E.g.
+
+        .navigation li {
+            //stylings
+        }
+
+    However, with Sass, you can nest the css selectors as you would
+    the elements themselves. Notice below, that the li element is
+    nested inside the .navigation selector. You can confirm by
+    looking at the css file that gets compiled from the sass file.
+
+    There's no limit to the nesting. For example in order to select
+    the last/first child of an element, you could use the following:
+
+        li: last-child {
+            margin: 0;
+        }
+
+    With Sass, you can nest the 'last-child' selector in the 'li'
+    selector already created, which itself is nested inside the
+    'navigation' selector.
+ */
+.navigation {
+    list-style: none;
+    float: left; //float allows an element to move to specified direction
+                 //of its container. In this case left.
+
+    /*  clear specifies whether an element can float next to it.
+        In this case, elements can float left and/or right of
+        this one.
+    */
+    //clear: both;
+
+    li { //nested selector
+        display: inline-block;
+        margin-left: 30px;
+
+        /*
+            The '&' gets replaced with the selector up until this point.
+            In this case, it will be '.navigation li'. The rest is appended
+            to give
+                '.navigation li: first-child'
+            The '&' is required when there should be no space separation
+            in the selector. E.g. without the '&', you would have
+                '.navigation li :first-child'.
+            Note the space between 'li' and ':first-child'. This does
+            not work.
+        */
+        &:first-child {
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            text-transform: uppercase;
+            color: $color-text-dark;
+        }
+    }
+}
+
+.buttons {
+    float: right;
+}
+
+.btn-main, .btn-hot {
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 100px;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: $width-button;
+    color: $color-text-light;
+}
+
+.btn-main {
+    &:link {
+        background-color: $color-secondary;
+    }
+
+    &:hover {
+        //Example of using built-in sass functions such as darken
+        //to create a 15%s darker color from our variable
+        background-color: darken($color-secondary, 15%);
+    }
+}
+
+.btn-hot {
+    &:link {
+        background-color: $color-tertiary;
+    }
+
+    &:hover {
+        //Example of using built-in sass functions such as lighten
+        //to create a 15% lighter color from our variable
+        background-color: lighten($color-tertiary, 15%);
+    }
+}
+

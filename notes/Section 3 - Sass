@@ -1,0 +1,40 @@
+Section 3:
+----------
+
+How to install Sass?
+-------------------------------------------
+Run
+    npm install -g sass
+
+How to convert Sass to css?
+-------------------------------------------
+In webstorm set up a filewatcher by going to:
+    File -> Settings -> Tools -> File Watchers
+
+Then add a new file watcher for Sass/Less/SCSS file types. You will then
+need to specify the path of the Sass executable from the installation. If you ran
+'npm install', then the path will be output to the console. In the arguments box enter the
+css file to be created.
+E.g.
+    program: C:\Program Files\Git\usr\local\sass.cmd
+    args   : --update $FileName$:$FileNameWithoutExtension$.css
+
+The '$FileName' is a variable used by Webstorm for the name of the file it has identified
+as a less/sass/scss file. Here we're simply using the same name for the css file.
+
+What are the main features of Sass?
+-------------------------------------------
+    1. Variables            - Reusable values such as color, font-sizes and spacing etc.
+    2. Nesting              - Nest selectors inside of one another
+    3. Operators            - Mathematical operations inside CSS
+    4. Partials & Imports   - Write CSS in different files and import into one.
+    5. Mixins               - Reusable pieces of CSS code
+    6. Functions            - Similar to mixins but produce a value that can be used
+    7. Extends              - Different selectors inherit declarations that are common to them all
+    8. Control Directives   - Use loops and conditionals (mostly used for CSS frameworks)
+
+What are the Sass syntax?
+-------------------------------------------
+There are two Sass syntax. One is standard Sass and the other is SCSS. The Sass syntax is indentation
+sensitive, doesn't use curly braces and doesn't use semi-colons. It is harder to convert from regular
+CSS to Sass projects as CSS uses semi-colons, curly braces etc. SCSS is more like CSS.

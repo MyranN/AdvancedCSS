@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  margin: 30px;
+  background-color: #f9ed69;
+  /*
+          Typically the clearfix hack is used when a 'floating' element is
+          taller than the element containing it. You can then specify
+          'overflow:auto' to the containing element to fix this.
+  
+          See line 67 for reasoning behind usage of '&'.
+      */
+}
+nav.clearfix {
+  content: "";
+  overflow: auto;
+}
+
+/*
+    Without Sass, in order to style the list items in an element
+    a new selector would be needed. E.g.
+
+        .navigation li {
+            //stylings
+        }
+
+    However, with Sass, you can nest the css selectors as you would
+    the elements themselves. Notice below, that the li element is
+    nested inside the .navigation selector. You can confirm by
+    looking at the css file that gets compiled from the sass file.
+
+    There's no limit to the nesting. For example in order to select
+    the last/first child of an element, you could use the following:
+
+        li: last-child {
+            margin: 0;
+        }
+
+    With Sass, you can nest the 'last-child' selector in the 'li'
+    selector already created, which itself is nested inside the
+    'navigation' selector.
+ */
+.navigation {
+  list-style: none;
+  float: left;
+  /*  clear specifies whether an element can float next to it.
+      In this case, elements can float left and/or right of
+      this one.
+  */
+}
+.navigation li {
+  display: inline-block;
+  margin-left: 30px;
+  /*
+      The '&' gets replaced with the selector up until this point.
+      In this case, it will be '.navigation li'. The rest is appended
+      to give
+          '.navigation li: first-child'
+      The '&' is required when there should be no space separation
+      in the selector. E.g. without the '&', you would have
+          '.navigation li :first-child'.
+      Note the space between 'li' and ':first-child'. This does
+      not work.
+  */
+}
+.navigation li:first-child {
+  margin: 0;
+}
+.navigation li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.buttons {
+  float: right;
+}
+
+.btn-main, .btn-hot {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 150px;
+  color: #eee;
+}
+
+.btn-main:link {
+  background-color: #f08a5d;
+}
+.btn-main:hover {
+  background-color: #ea5717;
+}
+
+.btn-hot:link {
+  background-color: #b83b5e;
+}
+.btn-hot:hover {
+  background-color: #d16f8a;
+}
+
+/*# sourceMappingURL=style.css.map */
