@@ -6,7 +6,7 @@ How to install Sass?
 Run
     npm install -g sass
 
-How to convert Sass to css?
+How to convert Sass to CSS in Webstorm IDE?
 -------------------------------------------
 In webstorm set up a filewatcher by going to:
     File -> Settings -> Tools -> File Watchers
@@ -21,6 +21,26 @@ E.g.
 
 The '$FileName' is a variable used by Webstorm for the name of the file it has identified
 as a less/sass/scss file. Here we're simply using the same name for the css file.
+
+How to convert Sass to CSS in package.json?
+-------------------------------------------
+You can add scripts to a projects package.json file. In the case of conversion from Sass/SCSS to CSS you can add a
+custom script entry as follows:
+    //package.json file
+    "scripts": {
+        "compile:sass": "node-sass sass/main.scss css/main.css -w"
+    },
+
+In the above example, a "compile:sass" script task has been added to run the 'node-sass' command. The node-sass
+command takes two mandatory arguments. The first is the input file (the scss/sass file) and the second is the output
+file. In this case, the script task will create a 'main.css' file.
+
+In order to run the script, navigate to the project directory in a terminal and run:
+    npm run compile:sass
+
+The final argument in the example script above (-w) is the 'watch' flag. This flag tells the node-sass package to watch
+the sass files for changes and recreate the output file automatically if there is a change. This saves you from having
+to run the script yourself.
 
 What are the main features of Sass?
 -------------------------------------------

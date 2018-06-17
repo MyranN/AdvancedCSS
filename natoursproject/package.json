@@ -4,7 +4,7 @@
   "description": "Natours Advanced CSS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile:sass": "node-sass sass/main.scss css/main.css -w"
   },
   "author": "Myran",
   "license": "ISC",
