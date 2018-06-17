@@ -1,0 +1,14 @@
+{
+  "name": "natoursproject",
+  "version": "1.0.0",
+  "description": "Natours Advanced CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Myran",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.9.0"
+  }
+}

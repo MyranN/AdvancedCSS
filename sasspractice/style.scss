@@ -105,7 +105,7 @@ nav {
             The '&' gets replaced with the selector up until this point.
             In this case, it will be '.navigation li'. The rest is appended
             to give
-                '.navigation li: first-child'
+                '.navigation li:first-child'
             The '&' is required when there should be no space separation
             in the selector. E.g. without the '&', you would have
                 '.navigation li :first-child'.

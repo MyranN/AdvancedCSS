@@ -1,0 +1,32 @@
+Section 3:
+----------
+
+How to install Node?
+-------------------------------------------
+
+Download Node.js from it's respective site.
+
+Node.js is a runtime environment to allow javascript (JS) code to run on the server side. It contains the NPM package
+manager which is used to retrieve tools/libraries that 3rd party vendors have created to aid in the development
+of websites. Sass, grunt libraries are examples of packages that are available.
+
+How to initialise a project with NPM?
+-------------------------------------------
+
+Run the following from your project root directory:
+    npm init
+
+This is a helper utility to setup a package.json file for your project. This file can also be created manually in a text
+editor. The package.json file outlines dependencies for your project.
+
+There is a distinction between dev dependencies and dependencies. The former is used to aid in the development but is
+not actually a part of the project. However, the latter is a part of the project.
+
+To install a package as a dev dependency, run:
+    npm install <package> --save-dev
+
+To install a package as a dependency, run:
+    npm install <package> --save
+
+To uninstall a package as a dependency/dev-dependency, run:
+    npm uninstall <package> --save/--save-dev
