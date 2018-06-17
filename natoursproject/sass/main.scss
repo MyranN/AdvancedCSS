@@ -1,288 +1,34 @@
-//declare color variables
-$color-primary: #55c57a;
-$color-primary-light: #7ed56f;
-$color-primary-dark: #28b485;
-$color-grey-dark: #777;
-$color-white: #fff;
-$color-black: #000;
-
 /*
- '*' is the universal selector for css
- By default a browser will provide some margin and paddings in elements so we're removing them.
+  main.scss imports other SCSS files based on the 7-1 principle. main.scss acts as
+  the 1 which only contains imports while the 7 refers to the seven directories
+  that get imported. The directories are:
+    1. abstracts  - holds Sass code that does not produce any css output such as
+                    functions, mixins and variables etc.
+    2. base       - holds Sass code that underpins the entire website and its pages.
+                    It literally holds the base Sass code, so the body element, the
+                    html element and any univeral Sass code.
+    3. components - holds Sass code for components, i.e independent reusable Sass
+                    bits of code that can be used anywhere. Each component has it's
+                    own file in this directory.
+    4. layouts    - holds Sass code related to the layouts of the web pages.
+    5. pages      - holds
+    6. themes     - holds Sass code related to themes. I.e. a website could have
+                    support for multiple themes. A dark theme, light theme etc.
+    7. vendors    - holds Sass code from third party vendors such as Bootstrap etc.
  */
-*, *::after, *::before { /* include the after/before virtual elements in the global reset of margin/padding etc.*/
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit; /*box sizing is not inherited by default. Rather than specify it in the all selector, it is
-                           practice to force inheritance of the property. Now every element will inherit the box-sizing
-                           of its parent element */
-}
 
-html {
-  /*font-size: 10px;*/ /*global font-size set so that all other measurements can use rem. This means all rem measurements
-                       will be relative to this measurement. Making this 10px makes calculations easier as we know 1rem
-                       is 10px, i.e. 1rem * 10px = 10px. This means to convert pixel measurements to rem measurements,
-                       simply divide by the pixel value by 10*/
+//The '_' and the file extension is not needed in the imports of the SCSS files.
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
 
-  font-size: 62.5%; /* It is not good practice to specify the global font-size in pixels as it means the user can no
-                         longer change the font-size via the browser. So to get around this, the global font-size is
-                         set as a percentage. Default browser settings are 16px for font-size, so in order to maintain
-                         1rem = 10px, we do: 10 / 16 * 100 to give us the percentage. */
-}
+@import "base/base";
+@import "base/animation";
+@import "base/typography";
+@import "base/utilities";
 
-body { /* 'var' defines css styling for elements
-    /*
-       All font settings go in the body css. All elements in the body will inherit these settings
-     */
-  font-family: "Lato", sans-serif;
-  font-weight: 400; /* The thickness of the font */
-  /*font-size: 16px; replaced by global font-size in html elements css*/
-  line-height: 1.7; /* 1.7 times bigger than the default */
-  color: $color-grey-dark;
-  padding: 3rem; /*applies padding in all sides of the body element. Child elements do not inherit padding settings */
-  /*
-    This property determines if borders and padding should count towards the width/height of an element
-    border-box means the width and height include the content, padding and border.
-  */
-  box-sizing: border-box;
-}
+@import "components/button";
 
-.header { /* '.var' defines css styling for classes */
-  height: 95vh; /* The height is 95% of the viewport height (vh). The viewport is what is visible in the browser. This setting will therefore leave 5% at the bottom of the viewport*/
-  /*
-     Specifying an imgs in your project source. Below two imgs are used, one linear-gradient and one img file (hero.jpg). Depending on what you want on top,
-     the order of the imgs is important. The top most must always be first. Below, the hero.jpg is at the bottom, the gradient applied on top.
-     The 'to right bottom' property on the gradient specifies the direction of the gradient applied from the top-left corner to the bottom right.
-     Note the colors are provided as rgba instead of the #hex values. This is to provide the final value which determines the transparency (0.8 in this case)
-  */
-  background-image: linear-gradient(
-                  to right bottom,
-                  rgba($color-primary-light, 0.8), //In regular css, you can't specify variables in rgba functions. You can in sass.
-                  rgba($color-primary-dark,0.8)),
-                  url('../img/hero.jpg');
-  background-size: cover; /* 'cover' fits the entire viewport with the element this class is applied to */
-  background-position: top; /* property sets the starting position of a background image, top-left being the default. If only one value is given, the second is 'center'*/
+@import "layouts/header";
 
-  /*
-     defines a polygon in terms of a series of (x y) co-ordinates  to show in view for this element. Important, this polygon is what you will see, not what will be clipped.
-     You can use any measurement to define the x and y co-ordinates including percent or pixel as below.
-  */
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-
-  /*
-   The element is positioned relative to its normal position. I.e. regardless of it's position, relative left:20px
-   would add 20px to the elements left
-  */
-  position: relative;
-
-  /*
-    Nesting selectors can be done for both elements and classes. Nesting selectors for elements is
-    the typical case. Whereby you can have something like the following:
-      ul {
-        li {
-          a {}
-        }
-      }
-
-      however you can do the same with classes that share a prefix using the '&' notation. Below
-      we've removed the 'header__...' classes and nested them in the '.header' selector.
-   */
-  &__logo-box {
-    position: absolute; /* The element is positioned relative to its first positioned ancestor element */
-    top: 4rem; /*40px from the top, relative to the parent element*/
-    left: 4rem; /*40px from the left, relative to the parent element*/
-  }
-
-  &__logo {
-    height: 3.5rem; /*width will be auto calculated by the browser, so only height is needed. */
-  }
-
-  &__text-box {
-    position: absolute;
-    top: 40%; /*Positions the the top-left corner of the element to 40% from the top.*/
-    left: 50%; /*Positions the top-left corner of the element 50% from the left */
-    /*
-      The top, left properties have moved the element such that it starts from 50% of the parent so it needs to be
-      adjusted by translation. The below moves the element 50% of its width, 50% of its height in the left and top directions.
-      Percentages refer to the height and width of the element itself, i.e. it's own bounding box.
-     */
-    transform: translate(-50%, -50%);
-    text-align: center; /* this moves the anchor 'discover our tours' to the center because the anchor is an inline-block so is treated as text */
-  }
-}
-
-.heading-primary {
-  color: $color-white;
-  text-transform: uppercase;
-  margin-bottom: 6rem;
-
-  /*
-    Property determines if whatever is behind the element is hidden during animation/translations
-    Also, used as a hack to correct a slight jolt movement when animating an element. No one knows why the jolt occurs.
-  */
-  backface-visibility: hidden;
-
-  &--main {
-    display: block; /* block elements occupy the entire width if a width is not specified and then place a line break at the end of the element*/
-    font-size: 6rem;
-    font-weight: 400;
-    letter-spacing: 3.5rem;
-
-    /*animations*/
-    animation-name: moveInLeft; /* specify the animation you defined using @keyframes*/
-    animation-duration: 3s;
-    animation-timing-function: ease-out; /* specifies the timings of the animation. such as faster in the beginning and slower in the end*/
-
-    /*animation-delay: 3s;  <-waits 3s before running this animation */
-    /*animation-iteration-count: 3; <- the number of times the animation runs*/
-
-  }
-
-  &--sub {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 1.75rem;
-
-    /*animations*/
-    animation-name: moveInRight; /* specify the animation you defined using @keyframes*/
-    animation-duration: 3s;
-    animation-timing-function: ease-out; /* specifies the timings of the animation. such as faster in the beginning and slower in the end*/
-  }
-}
-
-.btn {
-  /*
-  A pseudo class of an element represents a potential element state. An example is 'hover'.
-  A pseudo class is appended to the class, separated by a colon as defined below.
-  Below the 'link' state refers to an unclicked link, and a 'visited' state is when the link has been clicked.
-  In our case, the state should be the same for both, hence the comma separation and singular block
-*/
-  &:link,
-  &:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1.5rem 4rem; /* Specify two values means the first padding is applied to top and bottom, the second is applied to left and right */
-    border-radius: 10rem; /* Add curved sides on the left/right of the button/anchor*/
-    position: relative;
-    font-size: 1.6rem; /*Override global font-size for button/anchor*/
-    /*
-      Short hand form for transition property, where first value specifies that 'all' properties can be animated, the second value specifies the animation duration
-      the transition property must be set on the initial state of the element.
-    */
-    transition: all .2s;
-
-    display: inline-block; /* inline-blocks allow other elements to sit to their left and right, respect top and bottom margins and padding and respect height and width */
-
-    /*
-      Aside: display: inline; inline elements respect left, right and margins but NOT top and bottom. They cannot have a width and height set.
-      They allow other elements to sit to their left and right.
-     */
-  }
-
-  &:hover { /*Pseudo-class 'hover' applied when you have a mouseover */
-    transform: translateY(-.3rem); /*move the element up from bottom -> top */
-    box-shadow: 0 1rem 2rem rgba($color-black,.2);/*specifies the shadow, where the first value is x axis, second is y axis. The third value is the blur of the shadow. Finally, you can specify the color*/
-
-    &::after { /*an after virtual element only when the mouse is hovering over the element */
-      transform: scaleX(1.4) scaleY(1.6); /* doubles the size of the element */
-      opacity: 0; /*Set visibility to 0, in an animation this looks like a fade*/
-    }
-  }
-
-  &:active { /*Pseudo-class 'active' applied when the element is clicked */
-    transform: translateY(-.1rem);
-  }
-
-  &--white { /*white button specific settings*/
-    background-color: $color-white;
-    color: $color-grey-dark;
-    box-shadow: 0 .5rem 1rem rgba($color-black,.2);
-
-    &::after {
-      background-color: $color-white;
-    }
-  }
-
-  &--animated {
-    animation-name: moveInBottom;
-    animation-duration: .5s;
-    animation-timing-function: ease-out;
-    animation-delay: .75s;
-    animation-fill-mode: backwards; /* applies the styles of the element at 0% before the animation starts */
-  }
-
-  /*
-    'after' pseudo-element adds a virtual element after the actual element is selected. This virtual element can also be styled
-     The virtual element is treated as a child of the element itself, therefore using percentages as sizing values (see height/width settings below)
-     the virtual element is sized exactly as the element itself.
-  */
-  &::after {
-    /*
-      Here we're creating a virtual element that looks exactly like the existing button. This will be the start and end state of the virtual element.
-      The inbetween states will be the infinity effect.
-     */
-
-    /* content and display are mandatory properties of an 'after' pseudo-class*/
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1; /*specifies the position of an element if its on top of another. -1 puts it on the bottom. */
-
-    transition: all .4s; /*enable animation on all properties of this after element which will enable the hover effect on
-                           on the after element defined below */
-  }
-}
-
-
-/* Animations */
-@keyframes moveInLeft {
-  0% { /* Can specify any percentage you want. 0% is the start state, 100% is the final state*/
-    opacity: 0; /* the opacity is 0 at the start */
-    transform: translateX(-10rem); /* the start position is a 100px to the left */
-  }
-
-  80% {
-    transform: translateX(1rem); /* at 80% of the animation duration, the position should be 20px to the right */
-  }
-
-  100% {
-    opacity: 1; /* the opacity is 100 at the end */
-    transform: translateX(0); /* the end position is back to the starting position */
-  }
-}
-
-@keyframes moveInRight {
-  0% {
-    /* Can specify any percentage you want. 0% is the start state, 100% is the final state*/
-    opacity: 0; /* the opacity is 0 at the start */
-    transform: translateX(10rem); /* the start position is a 100px to the left */
-  }
-
-  80% {
-    transform: translateX(-1rem); /* at 80% of the animation duration, the position should be 20px to the right */
-  }
-
-  100% {
-    opacity: 1; /* the opacity is 100 at the end */
-    transform: translateX(0); /* the end position is back to the starting position */
-  }
-}
-
-@keyframes moveInBottom {
-  0% {
-    /* Can specify any percentage you want. 0% is the start state, 100% is the final state*/
-    opacity: 0; /* the opacity is 0 at the start */
-    transform: translateY(3rem); /* the start position is a 100px to the left */
-  }
-
-  100% {
-    opacity: 1; /* the opacity is 100 at the end */
-    transform: translateY(0); /* the end position is back to the starting position */
-  }
-}
+@import "pages/home";

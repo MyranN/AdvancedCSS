@@ -1,0 +1,51 @@
+/*
+  _animation.scss holds all the animation related Sass code. It belongs to the
+  'base' directory.
+ */
+
+/* Animations */
+@keyframes moveInLeft {
+  0% { /* Can specify any percentage you want. 0% is the start state, 100% is the final state*/
+    opacity: 0; /* the opacity is 0 at the start */
+    transform: translateX(-10rem); /* the start position is a 100px to the left */
+  }
+
+  80% {
+    transform: translateX(1rem); /* at 80% of the animation duration, the position should be 20px to the right */
+  }
+
+  100% {
+    opacity: 1; /* the opacity is 100 at the end */
+    transform: translateX(0); /* the end position is back to the starting position */
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    /* Can specify any percentage you want. 0% is the start state, 100% is the final state*/
+    opacity: 0; /* the opacity is 0 at the start */
+    transform: translateX(10rem); /* the start position is a 100px to the left */
+  }
+
+  80% {
+    transform: translateX(-1rem); /* at 80% of the animation duration, the position should be 20px to the right */
+  }
+
+  100% {
+    opacity: 1; /* the opacity is 100 at the end */
+    transform: translateX(0); /* the end position is back to the starting position */
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    /* Can specify any percentage you want. 0% is the start state, 100% is the final state*/
+    opacity: 0; /* the opacity is 0 at the start */
+    transform: translateY(3rem); /* the start position is a 100px to the left */
+  }
+
+  100% {
+    opacity: 1; /* the opacity is 100 at the end */
+    transform: translateY(0); /* the end position is back to the starting position */
+  }
+}

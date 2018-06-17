@@ -1,0 +1,69 @@
+/*
+  _header.scss holds the header related Sass code. It could be considered a component
+  as it is reusable independent Sass code. However, it belongs to the 'layouts'
+  directory because a header is related to the layout. This is of course subjective.
+ */
+
+.header { /* '.var' defines css styling for classes */
+  height: 95vh; /* The height is 95% of the viewport height (vh). The viewport is what is visible in the browser. This setting will therefore leave 5% at the bottom of the viewport*/
+  /*
+     Specifying an imgs in your project source. Below two imgs are used, one linear-gradient and one img file (hero.jpg). Depending on what you want on top,
+     the order of the imgs is important. The top most must always be first. Below, the hero.jpg is at the bottom, the gradient applied on top.
+     The 'to right bottom' property on the gradient specifies the direction of the gradient applied from the top-left corner to the bottom right.
+     Note the colors are provided as rgba instead of the #hex values. This is to provide the final value which determines the transparency (0.8 in this case)
+  */
+  background-image: linear-gradient(
+                  to right bottom,
+                  rgba($color-primary-light, 0.8), //In regular css, you can't specify variables in rgba functions. You can in sass.
+                  rgba($color-primary-dark,0.8)),
+  url('../img/hero.jpg');
+  background-size: cover; /* 'cover' fits the entire viewport with the element this class is applied to */
+  background-position: top; /* property sets the starting position of a background image, top-left being the default. If only one value is given, the second is 'center'*/
+
+  /*
+     defines a polygon in terms of a series of (x y) co-ordinates  to show in view for this element. Important, this polygon is what you will see, not what will be clipped.
+     You can use any measurement to define the x and y co-ordinates including percent or pixel as below.
+  */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  /*
+   The element is positioned relative to its normal position. I.e. regardless of it's position, relative left:20px
+   would add 20px to the elements left
+  */
+  position: relative;
+
+  /*
+    Nesting selectors can be done for both elements and classes. Nesting selectors for elements is
+    the typical case. Whereby you can have something like the following:
+      ul {
+        li {
+          a {}
+        }
+      }
+
+      however you can do the same with classes that share a prefix using the '&' notation. Below
+      we've removed the 'header__...' classes and nested them in the '.header' selector.
+   */
+  &__logo-box {
+    position: absolute; /* The element is positioned relative to its first positioned ancestor element */
+    top: 4rem; /*40px from the top, relative to the parent element*/
+    left: 4rem; /*40px from the left, relative to the parent element*/
+  }
+
+  &__logo {
+    height: 3.5rem; /*width will be auto calculated by the browser, so only height is needed. */
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%; /*Positions the the top-left corner of the element to 40% from the top.*/
+    left: 50%; /*Positions the top-left corner of the element 50% from the left */
+    /*
+      The top, left properties have moved the element such that it starts from 50% of the parent so it needs to be
+      adjusted by translation. The below moves the element 50% of its width, 50% of its height in the left and top directions.
+      Percentages refer to the height and width of the element itself, i.e. it's own bounding box.
+     */
+    transform: translate(-50%, -50%);
+    text-align: center; /* this moves the anchor 'discover our tours' to the center because the anchor is an inline-block so is treated as text */
+  }
+}

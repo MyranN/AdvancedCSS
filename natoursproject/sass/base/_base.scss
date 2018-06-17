@@ -1,0 +1,40 @@
+/*
+  _base.scss holds the low level basic Sass code such as resets as well as head
+  and body related Sass. It belongs to the 'base' directory as it is Sass code
+  related to the base of the project.
+*/
+
+/*
+ '*' is the universal selector for css
+ By default a browser will provide some margin and paddings in elements so we're removing them.
+ */
+*, *::after, *::before { /* include the after/before virtual elements in the global reset of margin/padding etc.*/
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /*box sizing is not inherited by default. Rather than specify it in the all selector, it is
+                           practice to force inheritance of the property. Now every element will inherit the box-sizing
+                           of its parent element */
+}
+
+html {
+  /*font-size: 10px;*/ /*global font-size set so that all other measurements can use rem. This means all rem measurements
+                       will be relative to this measurement. Making this 10px makes calculations easier as we know 1rem
+                       is 10px, i.e. 1rem * 10px = 10px. This means to convert pixel measurements to rem measurements,
+                       simply divide by the pixel value by 10*/
+
+  //font-size could be construed as a typography related css. However, in this case
+  //it is used to define what 1rem is.
+  font-size: 62.5%; /* It is not good practice to specify the global font-size in pixels as it means the user can no
+                       longer change the font-size via the browser. So to get around this, the global font-size is
+                       set as a percentage. Default browser settings are 16px for font-size, so in order to maintain
+                       1rem = 10px, we do: 10 / 16 * 100 to give us the percentage.
+                     */
+}
+
+body { /* 'var' defines css styling for elements
+  /*
+    This property determines if borders and padding should count towards the width/height of an element
+    border-box means the width and height include the content, padding and border.
+  */
+  box-sizing: border-box;
+}

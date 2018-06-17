@@ -1,0 +1,57 @@
+/*
+  _typography.scss holds Sass code related to typograpghy. It belongs to the 'base'
+  directory. Everything that is typography related should belong here.
+ */
+
+.body {
+  /*
+    All font settings go in the body css. All elements in the body will inherit these settings
+ */
+  font-family: "Lato", sans-serif;
+  font-weight: 400; /* The thickness of the font */
+  /*font-size: 16px; replaced by global font-size in html elements css*/
+  line-height: 1.7; /* 1.7 times bigger than the default */
+  color: $color-grey-dark;
+  padding: 3rem; /*applies padding in all sides of the body element. Child elements do not inherit padding settings */
+
+}
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+  margin-bottom: 6rem;
+
+  /*
+    Property determines if whatever is behind the element is hidden during animation/translations
+    Also, used as a hack to correct a slight jolt movement when animating an element. No one knows why the jolt occurs.
+  */
+  backface-visibility: hidden;
+
+  &--main {
+    display: block; /* block elements occupy the entire width if a width is not specified and then place a line break at the end of the element*/
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    /*animations*/
+    animation-name: moveInLeft; /* specify the animation you defined using @keyframes*/
+    animation-duration: 3s;
+    animation-timing-function: ease-out; /* specifies the timings of the animation. such as faster in the beginning and slower in the end*/
+
+    /*animation-delay: 3s;  <-waits 3s before running this animation */
+    /*animation-iteration-count: 3; <- the number of times the animation runs*/
+
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+
+    /*animations*/
+    animation-name: moveInRight; /* specify the animation you defined using @keyframes*/
+    animation-duration: 3s;
+    animation-timing-function: ease-out; /* specifies the timings of the animation. such as faster in the beginning and slower in the end*/
+  }
+}

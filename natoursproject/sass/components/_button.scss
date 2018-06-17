@@ -1,0 +1,94 @@
+/*
+  _button.scss is the Sass code responsible for the button component. It is a self
+  contained reusable component. It therefore belongs to the 'components' directory.
+  Note each component has it's own .scss file. In this case, the button component
+  has this _button.scss file.
+ */
+
+.btn {
+  /*
+  A pseudo class of an element represents a potential element state. An example is 'hover'.
+  A pseudo class is appended to the class, separated by a colon as defined below.
+  Below the 'link' state refers to an unclicked link, and a 'visited' state is when the link has been clicked.
+  In our case, the state should be the same for both, hence the comma separation and singular block
+*/
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem; /* Specify two values means the first padding is applied to top and bottom, the second is applied to left and right */
+    border-radius: 10rem; /* Add curved sides on the left/right of the button/anchor*/
+    position: relative;
+    font-size: 1.6rem; /*Override global font-size for button/anchor*/
+    /*
+      Short hand form for transition property, where first value specifies that 'all' properties can be animated, the second value specifies the animation duration
+      the transition property must be set on the initial state of the element.
+    */
+    transition: all .2s;
+
+    display: inline-block; /* inline-blocks allow other elements to sit to their left and right, respect top and bottom margins and padding and respect height and width */
+
+    /*
+      Aside: display: inline; inline elements respect left, right and margins but NOT top and bottom. They cannot have a width and height set.
+      They allow other elements to sit to their left and right.
+     */
+  }
+
+  &:hover { /*Pseudo-class 'hover' applied when you have a mouseover */
+    transform: translateY(-.3rem); /*move the element up from bottom -> top */
+    box-shadow: 0 1rem 2rem rgba($color-black,.2);/*specifies the shadow, where the first value is x axis, second is y axis. The third value is the blur of the shadow. Finally, you can specify the color*/
+
+    &::after { /*an after virtual element only when the mouse is hovering over the element */
+      transform: scaleX(1.4) scaleY(1.6); /* doubles the size of the element */
+      opacity: 0; /*Set visibility to 0, in an animation this looks like a fade*/
+    }
+  }
+
+  &:active { /*Pseudo-class 'active' applied when the element is clicked */
+    transform: translateY(-.1rem);
+  }
+
+  &--white { /*white button specific settings*/
+    background-color: $color-white;
+    color: $color-grey-dark;
+    box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--animated {
+    animation-name: moveInBottom;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    animation-delay: .75s;
+    animation-fill-mode: backwards; /* applies the styles of the element at 0% before the animation starts */
+  }
+
+  /*
+    'after' pseudo-element adds a virtual element after the actual element is selected. This virtual element can also be styled
+     The virtual element is treated as a child of the element itself, therefore using percentages as sizing values (see height/width settings below)
+     the virtual element is sized exactly as the element itself.
+  */
+  &::after {
+    /*
+      Here we're creating a virtual element that looks exactly like the existing button. This will be the start and end state of the virtual element.
+      The inbetween states will be the infinity effect.
+     */
+
+    /* content and display are mandatory properties of an 'after' pseudo-class*/
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /*specifies the position of an element if its on top of another. -1 puts it on the bottom. */
+
+    transition: all .4s; /*enable animation on all properties of this after element which will enable the hover effect on
+                           on the after element defined below */
+  }
+}
