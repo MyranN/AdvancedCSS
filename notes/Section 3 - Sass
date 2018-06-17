@@ -58,3 +58,16 @@ What are the Sass syntax?
 There are two Sass syntax. One is standard Sass and the other is SCSS. The Sass syntax is indentation
 sensitive, doesn't use curly braces and doesn't use semi-colons. It is harder to convert from regular
 CSS to Sass projects as CSS uses semi-colons, curly braces etc. SCSS is more like CSS.
+
+How to reload your web pages automatically?
+-------------------------------------------
+In order to reload your web pages as you make changes to them, you can install the 'live-server' package. This will
+run a server at localhost and load the project in which you ran the server.
+
+To install the package globally (-g) , run:
+    npm install live-server -g
+
+To run the server, navigate to your project root directory and run:
+    live-server
+
+The server will then run the index.html page in your project directory.
