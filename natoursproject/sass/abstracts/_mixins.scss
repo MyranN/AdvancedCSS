@@ -1,0 +1,17 @@
+/*
+  This clearfix hack works by appending a pseudo element after the element
+  to be 'fixed' to clear the floats.
+ */
+@mixin clearfix {
+  &::after {
+    /*
+      content property needs to be provided else the pseudo element 'after' will not
+      appear on the page. It's set to empty because we don't actually want to see
+      the pseudo element on the page.
+     */
+    content: "";
+    display: table;
+    //This property actually provides the fix, i.e. clear both the float left and float right.
+    clear: both;
+  }
+}

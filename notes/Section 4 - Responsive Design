@@ -1,0 +1,41 @@
+Section 4:
+----------
+
+What is required for basic responsive design?
+--------------------------------------------------
+
+Fluid Grids:
+Fluid grids and layouts to allow content to easily adapt to the current viewport
+width used to browse the website. Use % rather than px for all layout-related
+lengths.
+
+Flexible Images:
+Flexible and responsive images are required. Images behave differently than
+text content so we need to ensure they also adapt to the current viewport. Images
+don't scale as the viewport changes so the image dimensions need to be specified
+in % rather than fixed units. Images also take up the most size on websites so
+they need to be optimised for different widths.
+
+Media Queries:
+Media queries allow for styles to be changed on certain viewport widths (breakpoints)
+which in turn allows for creating a different version of a website for different
+widths (different sized devices).
+
+What are the different ways to layout a website?
+--------------------------------------------------
+There are 3 main layouts:
+    1. Float layouts - These are the most common layouts where boxes are placed
+                       side by side using floats. The alternatives to this are
+                       still not 100% supported by modern browsers.
+    2. FlexBox       - Flexbox allows you to arrange elements in a one dimensional
+                       row. Flexbox is not fully supported in 2017 across all
+                       browsers.
+    3. CSS Grid      - CSS Grid on the other hand allows you to arrange elements
+                       in a two dimensional grid with most flexibility. CSS Grid
+                       is also not fully supported in 2017 across all browsers.
+
+See TypicalGridLayout.PNG for how grids are laid out on a web page. I.e.
+A row is split into columns and elements take up a portion of those columns.
+E.g. a row is split into 4 columns, where the first element takes 1 col and the
+another element takes the remaining 3 columns.
+There is also default spacing between each element in the row.
