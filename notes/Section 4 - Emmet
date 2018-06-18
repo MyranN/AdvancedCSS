@@ -1,0 +1,42 @@
+Section 4:
+----------
+
+What is Emmet?
+--------------------------------------------------
+Emmett/Emmet is a plugin for text-editors (included in Webstorm) to quickly
+generate html code.
+
+How to use Emmet?
+--------------------------------------------------
+In order to create an element and provide a class, type:
+    element.class_name
+replacing 'element' and 'class_name' as required. Then press TAB. An example
+of the short-hand and the results when TAB is pressed, is shown:
+    command: section.section-primary
+    result : <section class="section-primary"></section>
+
+In order to create an element and sub-elements (use '>'), type:
+    element.class_name>sub-element.__sub_class_name
+
+    command: section.section-primary>div.__header
+    result : <section class="section-primary">
+                <div class="__header">
+                </div>
+             </section>
+
+In order to create multiple sub-elements in an element (use '()' and multiply), type:
+    element.class_name>(sub-element.__sub_class_name) * 2
+
+    command: section.primary>(img.__photo) * 3
+    result : <section class="primary">
+                <img src="", alt="" class="__photo">
+                <img src="", alt="" class="__photo">
+                <img src="", alt="" class="__photo">
+             </section>
+
+In order to give multiple classes to an element, type:
+    element.class_name.second_class_name
+
+    command: section.primary.landing
+    result : <section class="primary landing"></section>
+

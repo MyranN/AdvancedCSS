@@ -1,0 +1,76 @@
+/*
+  _composition.scss is the Sass code responsible for the photo composition you see in
+  the 'About' section. It is a self contained reusable component. It therefore belongs
+  to the 'components' directory.
+ */
+
+.composition {
+
+  position: relative;
+
+  &__photo {
+    width: 55%; //Use percentages for flexible images to allow for different sized devices.
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+    /*
+      By making this absolute, its position is relative to the first parent element
+      that has its position set. In this case we want the photo composition to be relative
+      to the element with class 'composition' so it has its position set to relative. See
+      line 9;
+      This means the position of the element with this class ('__photo') is at (0,0) of the
+      parent element with class 'composition'. Therefore you can provide adjustments by way of
+      'left','top','right','bottom' properties to move the element.
+     */
+    position: absolute;
+
+    /*
+      Give every element with class '__photo' a default z-index of 10. This is then overridden
+      when hovering, resulting in the hovered element placed on top. See line 52.
+     */
+    z-index: 10;
+
+    transition: all 0.2s;
+    outline-offset: 2rem;
+
+    &--p1 {
+      left: 0; //positions the element 0px from the left of the container
+      top: -2rem;
+    }
+
+    &--p2 {
+      right: 0; //positions the element 0px from the right of the container
+      top: 2rem;
+    }
+
+    &--p3 {
+      left: 20%;
+      top: 10rem;
+    }
+
+    &:hover {
+      transform: scale(1.05) translateY(-5rem);
+      box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+      z-index: 20;
+
+      /*
+        Create a box around the hovered photo with a gap. By using 'outline' instead of
+        border, we can create the gap by specifying an 'outline-offset' property in
+        the un-hovered state. See line 32.
+       */
+      outline: 1.5rem solid $color-primary; //create a surrounding box like a border
+    }
+  }
+
+  /*
+    When hovering over a photo, we want to shrink the other photos in the composition.
+    In order to do this, when we hover over a composition, we select the sub-elements that
+    ARE NOT hovered.
+    The below selector translates to:
+      composition:hover composition__photo:not(:hover)
+
+    I.e When we hover over a composition ('composition:hover') we select the sub elements
+    ('composition__photo') that are not hovered (':not(:hover)')
+   */
+  &:hover &__photo:not(:hover) {
+    transform: scale(.95);
+  }
+}
