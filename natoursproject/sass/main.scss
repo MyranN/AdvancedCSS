@@ -11,7 +11,9 @@
                     bits of code that can be used anywhere. Each component has it's
                     own file in this directory.
     4. layouts    - holds Sass code related to the layouts of the web pages.
-    5. pages      - holds
+    5. pages      - holds Sass code specific to a particular web page in a website.
+                    Each page in the site can have it's own file to contain Sass
+                    specific to it.
     6. themes     - holds Sass code related to themes. I.e. a website could have
                     support for multiple themes. A dark theme, light theme etc.
     7. vendors    - holds Sass code from third party vendors such as Bootstrap etc.

@@ -55,3 +55,40 @@ body {
     animation-timing-function: ease-out; /* specifies the timings of the animation. such as faster in the beginning and slower in the end*/
   }
 }
+
+//Creating a text heading colored with a gradient.
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  /*
+    Create a linear gradient on the box surrounding the text. Remember every element
+    is wrapped in a box.
+  */
+  background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+  display: inline-block; //apply the gradient only as far the text. I.e. not the entire width.
+  -webkit-background-clip: text; //webkit property to clip the background where the text is. I.e. Only the text has the gradient.
+  color: transparent; //Change the text color to transparent to let the clipped gradient behind come through
+
+  letter-spacing: 2px; //2px is so small, that the need for rem is unnecessary
+  transition: all .2s;
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+  }
+}
+
+.heading-tertiary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: $default-font-size;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}

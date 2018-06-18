@@ -11,7 +11,9 @@
                     bits of code that can be used anywhere. Each component has it's
                     own file in this directory.
     4. layouts    - holds Sass code related to the layouts of the web pages.
-    5. pages      - holds
+    5. pages      - holds Sass code specific to a particular web page in a website.
+                    Each page in the site can have it's own file to contain Sass
+                    specific to it.
     6. themes     - holds Sass code related to themes. I.e. a website could have
                     support for multiple themes. A dark theme, light theme etc.
     7. vendors    - holds Sass code from third party vendors such as Bootstrap etc.
@@ -166,6 +168,51 @@ body {
     animation-timing-function: ease-out;
     /* specifies the timings of the animation. such as faster in the beginning and slower in the end*/ }
 
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  /*
+    Create a linear gradient on the box surrounding the text. Remember every element
+    is wrapped in a box.
+  */
+  background-image: linear-gradient(to right, #7ed56f, #28b485);
+  display: inline-block;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 2px;
+  transition: all .2s; }
+  .heading-secondary:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+
+.heading-tertiary {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+.paragraph {
+  font-size: 1.6rem; }
+  .paragraph:not(:last-child) {
+    margin-bottom: 3rem; }
+
+/*
+  _utilities.scss holds utility Sass code to perform certain functionality. It
+  belongs to the 'base' directory. Utility classes are very simple classes
+  that are to be reused
+*/
+.u-center-text {
+  text-align: center; }
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem; }
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem; }
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem; }
+
 /*
   _button.scss is the Sass code responsible for the button component. It is a self
   contained reusable component. It therefore belongs to the 'components' directory.
@@ -254,6 +301,25 @@ body {
     /*enable animation on all properties of this after element which will enable the hover effect on
                            on the after element defined below */ }
 
+.btn-text:link, .btn-text:visited {
+  font-size: 1.6rem;
+  color: #55c57a;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid #55c57a;
+  padding: 3px;
+  transition: all .2s; }
+
+.btn-text:hover {
+  background-color: #55c57a;
+  color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px); }
+
+.btn-text:active {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transform: translateY(0); }
+
 /*
   _header.scss holds the header related Sass code. It could be considered a component
   as it is reusable independent Sass code. However, it belongs to the 'layouts'
@@ -328,7 +394,6 @@ body {
     the max-width, then the element takes up the entire width available.
    */
   max-width: 114rem;
-  background-color: #eee;
   /*
     Trick to center a block element inside of another block element. Here we're
     saying the top and bottom margins are 0 and the left and right margins are
@@ -377,7 +442,6 @@ body {
     display: table;
     clear: both; }
   .row [class^="col-"] {
-    background-color: orangered;
     /*
       All columns are floated to the left to create a sequence. However, this means
       that the parent 'row' element has a height of 0px (because all the child elements
@@ -425,3 +489,23 @@ body {
     width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem); }
   .row .col-3-of-4 {
     width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
+
+/*
+  _home.scss holds the Sass code related to the home page or landing page of the
+  website. It belongs to the 'pshrd' directory as it is Sass code related to a
+  particular page.
+*/
+.section-about {
+  background-color: #f7f7f7;
+  padding: 25rem 0;
+  /*
+    The background is set to grey which means that the triangle/wedge
+    clipped from the bottom of the title view is mismatched because
+    it will be white. We know from the _header.scss file that the height
+    of the header is 95vh or 95% of the viewport height. We also know
+    that the polygon clipped to create the wedge is 75vh or 75% of the
+    viewport. Therefore the wedge height is 20vh and we move this section
+    up using negative top margin by that amount in order to fill the color
+    with light-grey as per this section.
+   */
+  margin-top: -20vh; }

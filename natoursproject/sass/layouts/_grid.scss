@@ -5,7 +5,6 @@
     the max-width, then the element takes up the entire width available.
    */
   max-width: $grid-width; //Typical standard default width is 1140px. Equates to 114rem.
-  background-color: #eee;
 
   /*
     Trick to center a block element inside of another block element. Here we're
@@ -45,7 +44,6 @@
     all the columns.
    */
   [class^="col-"] {
-    background-color: orangered;
 
     /*
       All columns are floated to the left to create a sequence. However, this means

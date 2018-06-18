@@ -1,0 +1,22 @@
+/*
+  _home.scss holds the Sass code related to the home page or landing page of the
+  website. It belongs to the 'pshrd' directory as it is Sass code related to a
+  particular page.
+*/
+
+.section-about {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0;
+
+  /*
+    The background is set to grey which means that the triangle/wedge
+    clipped from the bottom of the title view is mismatched because
+    it will be white. We know from the _header.scss file that the height
+    of the header is 95vh or 95% of the viewport height. We also know
+    that the polygon clipped to create the wedge is 75vh or 75% of the
+    viewport. Therefore the wedge height is 20vh and we move this section
+    up using negative top margin by that amount in order to fill the color
+    with light-grey as per this section.
+   */
+  margin-top: -20vh;
+}

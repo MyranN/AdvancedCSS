@@ -1,0 +1,22 @@
+/*
+  _utilities.scss holds utility Sass code to perform certain functionality. It
+  belongs to the 'base' directory. Utility classes are very simple classes
+  that are to be reused
+*/
+
+.u-center-text {
+  text-align: center;
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem;
+}
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem;
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem;
+}
+
