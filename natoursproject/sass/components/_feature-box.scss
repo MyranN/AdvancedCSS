@@ -1,0 +1,44 @@
+/*
+  _feature-box.scss is the Sass code responsible for the boxes displayed in the 'Feature'
+  section. It is a self contained reusable component. It therefore belongs to the 'components'
+  directory.
+ */
+
+.feature-box {
+  background-color: rgba($color-white, .8);
+  font-size: 1.5rem; //inherited by child (in our case
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+  transition: transform .3s; //a more specific transition property as we are only using transform in the :hover rather than 'all'
+
+  &__icon {
+    font-size: 6rem;
+    margin-bottom: .5rem;
+
+    /*
+      Create a linear gradient on the box surrounding the icon. Remember every element
+      is wrapped in a box.
+    */
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    display: inline-block; //apply the gradient only as far the icon. I.e. not the entire width.
+
+    //webkit property to clip the background where the icon lines are. I.e. Only the icon has the gradient.
+    //remember icon-fonts are treated as text
+    -webkit-background-clip: text;
+    color: transparent; //Change the icon color to transparent to let the clipped gradient behind come through
+
+    letter-spacing: 2px; //2px is so small, that the need for rem is unnecessary
+    transition: all .2s;
+  }
+
+  &:hover {
+    transform: translateY(-1.5rem) scale(1.03);
+  }
+
+  &__text {
+
+  }
+}

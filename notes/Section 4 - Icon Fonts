@@ -1,0 +1,39 @@
+Section 4:
+----------
+
+What is an icon-font?
+--------------------------------------------------
+An icon font is simply various graphics files for a given icon and the associated css file.
+For example, linea.io provide .PNG, .SVG and various other formats. You should avoid
+using .PNG files and opt to using .SVG or other vector formats as they scale.
+Images such .PNG files don't scale.
+
+They are called icon fonts because they are essentially fonts. Therefore, you can use font
+related css to style them such font-size etc.
+
+Where to get icon fonts?
+--------------------------------------------------
+Icon fonts can be obtained for free from numerous third parties. One common icon-font
+provider is:
+    www.linea.io
+
+Simply download the entire zip of icon-fonts and include the css file of the required
+icons you wish to use in your html. Ensure that you copy the source vector files
+that the css file refers to, within your project code.
+
+How to use icon fonts?
+--------------------------------------------------
+Within a html file, an icon-font is simply attached to a 'holding' element. This
+element can be ANY element. It has become convention to use the italics element <i>
+for icons. Once you've decided on an element, simply refer to icon-font reference
+to identify the class name for a given icon. Then use that class as a class of the
+element you chose. For example, below we have attached the linea.io icon-basic-world icon
+(where the 'icon-basic-world' class name is identified from the associated reference file).
+    <section>
+        //Can style icon-fonts with font properties.
+        <i style="font-size: 6rem" class="icon-basic-world"></i> //This element will be replaced with icon
+    </section>
+
+The element that the icon class is attached to, is then REPLACED by the icon itself.
+
+

@@ -20,3 +20,35 @@
    */
   margin-top: -20vh;
 }
+
+.section-features {
+  padding: 20rem 0;
+
+  /*
+    This is similar sass code used for the background image in the _header.scss
+    file
+   */
+  background-image: linear-gradient(
+                  to right bottom,
+                  rgba($color-primary-light, 0.8),
+                  rgba($color-primary-dark,0.8)),
+                  url('../img/nat-4.jpg');
+  background-size: cover; //image should cover the entire container
+
+  margin-top: -10rem; //move the section up to cover the white space revealed by the skew below
+  transform: skewY(-7deg); //skews the entire section by -7degrees
+
+  /*
+    This is the 'direct child selector' and is used to select the direct children
+    of the element with this class (i.e. section-features).
+    The * in the selector below is the universal selector, the '>' denote the direct child.
+    Therefore this evaluates to: 'select all (*) direct children (>)'.
+
+    I.e.:
+      '& > *' == 'Select all direct children'
+      '& *'   == 'Select all children'
+   */
+  & > * {
+    transform: skewY(7deg) //skew the direct children 7degrees to offset the parent skew of -7.
+  }
+}
