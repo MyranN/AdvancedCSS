@@ -213,6 +213,12 @@ body {
 .u-margin-bottom-small {
   margin-bottom: 1.5rem; }
 
+.u-margin-top-big {
+  margin-top: 8rem; }
+
+.u-margin-top-huge {
+  margin-top: 10rem; }
+
 /*
   _button.scss is the Sass code responsible for the button component. It is a self
   contained reusable component. It therefore belongs to the 'components' directory.
@@ -266,14 +272,20 @@ body {
       /*Set visibility to 0, in an animation this looks like a fade*/ }
   .btn:active {
     /*Pseudo-class 'active' applied when the element is clicked */
-    transform: translateY(-0.1rem); }
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
   .btn--white {
     /*white button specific settings*/
     background-color: #fff;
-    color: #777;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+    color: #777; }
     .btn--white::after {
       background-color: #fff; }
+  .btn--green {
+    /*white button specific settings*/
+    background-color: #55c57a;
+    color: #fff; }
+    .btn--green::after {
+      background-color: #55c57a; }
   .btn--animated {
     animation-name: moveInBottom;
     animation-duration: .5s;
@@ -450,6 +462,9 @@ body {
    */
   /*
     The sass code below is for the Front side styling
+   */
+  /*
+    Back side styling
    */ }
   .card__side {
     font-size: 2rem;
@@ -502,7 +517,9 @@ body {
     height: 23rem;
     background-blend-mode: screen;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px; }
     .card__picture--1 {
       /*
         Assumes this sass becomes the main.css file, therefore go up one
@@ -553,6 +570,23 @@ body {
         padding: 1rem; }
         .card__details ul li:not(:last-child) {
           border-bottom: 1px solid #eee; }
+  .card__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center; }
+  .card__price-box {
+    text-align: center;
+    margin-bottom: 8rem;
+    color: #fff; }
+  .card__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase; }
+  .card__price-value {
+    font-size: 6rem;
+    font-weight: 100; }
 
 /*
   _header.scss holds the header related Sass code. It could be considered a component
@@ -771,5 +805,5 @@ body {
 
 .section-tours {
   background-color: #f7f7f7;
-  padding: 25rem 0 50rem 0;
+  padding: 25rem 0 15rem 0;
   margin-top: -10rem; }

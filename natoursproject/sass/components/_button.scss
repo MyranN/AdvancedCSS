@@ -46,15 +46,24 @@
 
   &:active { /*Pseudo-class 'active' applied when the element is clicked */
     transform: translateY(-.1rem);
+    box-shadow: 0 .5rem 1rem rgba($color-black,.2);
   }
 
   &--white { /*white button specific settings*/
     background-color: $color-white;
     color: $color-grey-dark;
-    box-shadow: 0 .5rem 1rem rgba($color-black,.2);
 
     &::after {
       background-color: $color-white;
+    }
+  }
+
+  &--green { /*white button specific settings*/
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
     }
   }
 
