@@ -23,7 +23,9 @@
   /*
      defines a polygon in terms of a series of (x y) co-ordinates  to show in view for this element. Important, this polygon is what you will see, not what will be clipped.
      You can use any measurement to define the x and y co-ordinates including percent or pixel as below.
+     The -webkit-clip-path is to support other browsers.
   */
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
   /*

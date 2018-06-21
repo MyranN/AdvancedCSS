@@ -25,13 +25,12 @@
     positioning, this cannot be done. So we simply specify the height to be the
     same as the child elements.
    */
-  height: 50rem;
+  height: 52rem;
 
   &__side {
-    color: $color-white;
     font-size: 2rem;
 
-    height: 50rem;
+    height: 52rem;
     transition: all .8s ease; //'ease' is a timing function for smoother animation.
     position: absolute;
     top: 0;
@@ -54,6 +53,12 @@
 
     border-radius: 3px;
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+    /*
+      Set overflow to hidden so that when the image is placed
+      on the card (see line 118), it does not hide the rounded edges.
+     */
+    overflow: hidden;
 
     &--front {
       background-color: $color-white;
@@ -89,8 +94,8 @@
     to do different things based on the front and back.
    */
   &:hover &__side--front{
-    //rotates the card 180 degrees in the y-axis
-    transform: rotateY(180deg);
+    //rotates the card -180 degrees in the y-axis, i.e the opposite direction
+    transform: rotateY(-180deg);
   }
 
   /*
@@ -104,5 +109,104 @@
    */
   &:hover &__side--back{
     transform: rotateY(0);
+  }
+
+  /*
+    The sass code below is for the Front side styling
+   */
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+    //blending type to blend the img with the linear gradient below.
+    background-blend-mode: screen;
+
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    &--1 {
+      /*
+        Assumes this sass becomes the main.css file, therefore go up one
+        directory for img folder.
+        Also blending the image with a linear gradient. This can only be
+        done with a background-image. Hence why we're not just using the
+        <img> element in the html.
+       */
+      background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+                        url(../img/nat-5.jpg);
+    }
+
+    &--2 {
+      background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
+                        url(../img/nat-6.jpg);
+    }
+
+    &--3 {
+      background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark),
+                        url(../img/nat-7.jpg);
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+
+  &__heading-span {
+    padding: 1rem 1.5rem; //forces the text to be split across multiple lines
+    /*
+      splits an inline block spread across multiple lines into separate
+      blocks, where line has it's own block. The 'clone' setting applies
+      the styles of the selector to each separate block rather than to
+      the original single inline block.
+     */
+    -webkit-box-decoration-break: clone;
+
+    &--1 {
+      background-image: linear-gradient(to right bottom,
+              rgba($color-secondary-light, .85),
+              rgba($color-secondary-dark, .85)
+      );
+    }
+
+    &--2 {
+      background-image: linear-gradient(to right bottom,
+              rgba($color-primary-light, .85),
+              rgba($color-primary-dark, .85)
+      );
+    }
+
+    &--3 {
+      background-image: linear-gradient(to right bottom,
+              rgba($color-tertiary-light, .85),
+              rgba($color-tertiary-dark, .85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+
+    ul {
+      list-style: none;
+      width: 80%; //don't want to occupy the entire width
+      margin: 0 auto; //automatically center an element in another element.
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid $color-grey-light-2;
+          }
+      }
+    }
   }
 }
