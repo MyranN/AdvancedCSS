@@ -1,0 +1,108 @@
+/*
+  _cards.scss is the Sass code responsible for the rotating cards displayed in the
+  'Tours' section. It is a self contained reusable component. It therefore belongs to
+  the 'components' directory.
+ */
+
+.card {
+
+  /*
+    The perspective property is an effect to make the element appear to move closer to
+    you, in this case during rotation. The lower the perspective the more dramatic the
+    effect.
+   */
+  perspective: 150rem;
+  -moz-perspective: 150rem; //Required for Firefox
+
+  position: relative;
+
+  /*
+    Because absolute positioning was used in the child elements, this took
+    the child elements out of the natural flow. The parent, in this case the
+    element with class 'card' collapses to having a 0 height. This is similar
+    to what happens when using floats.
+    However, whereas with floats, the clearfix hack can be used, with absolute
+    positioning, this cannot be done. So we simply specify the height to be the
+    same as the child elements.
+   */
+  height: 50rem;
+
+  &__side {
+    color: $color-white;
+    font-size: 2rem;
+
+    height: 50rem;
+    transition: all .8s ease; //'ease' is a timing function for smoother animation.
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /*
+      By specifying positioning properties, the width is adjusted to the size
+      of the content. However, we want the width of the card to take up the
+      entire container.
+     */
+    width: 100%;
+
+    /*
+      Hides the back of an element. I.e. during rotation or some transformation.
+      Without it, you would see the element as though from the back, i.e, the
+      content of the element would be flipped as though in a mirror. You can
+      test this by simply viewing text within a div and rotating the div.
+     */
+    backface-visibility: hidden;
+
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    /*
+      The back of the card is already set to 180deg. Therefore when you
+      hover over the card, only the front of the card needs to rotate
+      180deg.
+     */
+    &--back {
+      transform: rotateY(180deg);
+
+      &--1 {
+        background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+      }
+
+      &--2 {
+        background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+      }
+
+      &--3 {
+        background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+      }
+    }
+  }
+
+  /*
+    When hovering over the card, then the card__side element should
+    be transformed, in this case rotated. We don't want to transform
+    on the hover alone because we may want to perform other actions
+    based on other classes, not just card__side. In our case, we want
+    to do different things based on the front and back.
+   */
+  &:hover &__side--front{
+    //rotates the card 180 degrees in the y-axis
+    transform: rotateY(180deg);
+  }
+
+  /*
+   The back of the card is already rotated at 180degrees by default.
+   Therefore when we hover over it, we want it to rotate back to 0deg.
+   This ensures that the front and back are opposite at any given time.
+   I.e. start: back  = 180deg rotated.
+               front = 0deg rotated.
+        hover: back  = 0deg rotated.
+               front = 180deg rotated.
+   */
+  &:hover &__side--back{
+    transform: rotateY(0);
+  }
+}
