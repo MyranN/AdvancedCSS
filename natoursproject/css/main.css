@@ -601,7 +601,8 @@ body {
   border-radius: 3px;
   padding: 6rem;
   padding-left: 9rem;
-  font-size: 1.6rem; }
+  font-size: 1.6rem;
+  transform: skewX(-12deg); }
   .story__shape {
     width: 15rem;
     height: 15rem;
@@ -622,10 +623,49 @@ body {
     shape-outside: circle(50% at 50% 50%);
     -webkit-clip-path: circle(50% at 50% 50%);
     clip-path: circle(50% at 50% 50%);
-    transform: translateX(-3rem); }
+    /*
+      This transform takes precedence over the transform specified in the direct
+      child selector on line 21 because it is more specific (narrower scope).
+      Therefore, the child selector does not work and is commented out.
+      The skew needs to be manually added here.
+    */
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative; }
   .story__img {
     height: 100%;
-    width: 100%; }
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all .5s; }
+  .story__text {
+    /*
+      skew needs to be manually added here because the direct child selector
+      will not work because the transform trying to be applied is overriden by
+      the one in the &__shape selector. Therefore the children need to have the skew
+      set manually.
+     */
+    transform: skewX(12deg); }
+  .story__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    opacity: 0;
+    transition: all .5s;
+    backface-visibility: hidden;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center; }
+  .story:hover .story__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%); }
+  .story:hover .story__img {
+    transform: translateX(-4rem) scale(1);
+    /*
+      filter properties to blur etc. There are several other filters that can
+      be applied. A brightness value below 100% is darker. Above is brighter.
+     */
+    filter: blur(3px) brightness(80%); }
 
 /*
   _header.scss holds the header related Sass code. It could be considered a component

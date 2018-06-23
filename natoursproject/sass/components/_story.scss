@@ -52,12 +52,20 @@
       The skew needs to be manually added here.
     */
     transform: translateX(-3rem) skewX(12deg);
+
+    position: relative;
   }
 
   &__img {
     //height is used because the actual image is wider than it's height so using
     //100% width does not render the entire image in the circle.
     height: 100%; //100% of the parent, i.e. 15rem (the height of the story__shape
+
+    //readjust image to be centered in the circle using translateX. Then set the
+    //initial state of the img (pre-hover) to be scaled up.
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;//fixes weird results of the transform above.
+    transition: all .5s;//Add transition so that hover animation effect is applied.
   }
 
   &__text {
@@ -68,5 +76,38 @@
       set manually.
      */
     transform: skewX(12deg)
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    //starting position of the caption text is further down so that when hovering,
+    //we can animate it coming up. It also needs to be invisible in the start state.
+    transform: translate(-50%, 20%);
+    opacity: 0; //invisible
+    transition: all .5s; //add transition so that hover animation effect is applied.
+    backface-visibility: hidden; //fix small shaking glitch in the animation
+
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  &:hover &__caption {//selecting the caption once hovering over the story
+    opacity: 1; //make visible again
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__img {//selecting the img once hovering over the story
+    transform: translateX(-4rem) scale(1);
+
+    /*
+      filter properties to blur etc. There are several other filters that can
+      be applied. A brightness value below 100% is darker. Above is brighter.
+     */
+    filter: blur(3px) brightness(80%);
   }
 }
