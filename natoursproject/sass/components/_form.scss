@@ -75,4 +75,61 @@
     visibility: hidden; //this hides the element but can't animate on it.
     transform: translateY(-4rem); //initial state of label when the placeholder is visible.
   }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  /*
+    The custom radio button
+   */
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute; //use positioning to set position of button.
+    left: 0;
+    top: -.4rem;
+
+    &::after { //after pseudo element to be the inner circle on selection
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0; //make sure inner circle is blank initially. i.e. unselected.
+    }
+  }
+
+  /*
+    Use the checked pseudo class available to all radio buttons to determine
+    whether the custom button should have the inner circles displayed, i.e.
+    selected.
+    The selector below first selects the radio button once in a checked
+    state. It then selects the sibling element, i.e. the radio-label and
+    finally it selects the child, i.e. the span elements 'after' state
+    aka our custom radio button 'after' state defined on line 104.
+   */
+  &__radio-input:checked ~ &__radio-label &__radio-button:after {
+    opacity: 1;
+  }
+
+  &__radio-input {
+    display: none; //hide the original radio button.
+  }
 }

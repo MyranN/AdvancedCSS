@@ -12,6 +12,11 @@
   Below the 'link' state refers to an unclicked link, and a 'visited' state is when the link has been clicked.
   In our case, the state should be the same for both, hence the comma separation and singular block
 */
+  &, //Need this for the <button> element in the booking form section.
+     //This is because the button element doesn't have a 'link' or 'visited'
+     //pseudo class so the styling below doesn't get applied. By specify the
+     //'&', this essentially translates to selecting the '.btn' class
+     //as well as .btn:link, .btn:visited.
   &:link,
   &:visited {
     text-transform: uppercase;
@@ -32,9 +37,18 @@
       Aside: display: inline; inline elements respect left, right and margins but NOT top and bottom. They cannot have a width and height set.
       They allow other elements to sit to their left and right.
      */
+
+    /*
+      Change for the <button> element.
+     */
+    border: none; //Remove the default border given to the <button> element.
+    cursor: pointer;
   }
 
-  &:hover { /*Pseudo-class 'hover' applied when you have a mouseover */
+  /*
+    Pseudo-class 'hover' applied when you have a mouseover.
+  */
+  &:hover {
     transform: translateY(-.3rem); /*move the element up from bottom -> top */
     box-shadow: 0 1rem 2rem rgba($color-black,.2);/*specifies the shadow, where the first value is x axis, second is y axis. The third value is the blur of the shadow. Finally, you can specify the color*/
 
@@ -44,7 +58,17 @@
     }
   }
 
-  &:active { /*Pseudo-class 'active' applied when the element is clicked */
+  /*
+    Pseudo-class 'active' applied when the element is clicked
+
+    The 'focus' pseudo class was added for the <button> element
+    in the booking form. Essentially to remove the default
+    focus outline (blue rectangle) and replaced with the active
+    effect.
+   */
+  &:active,
+  &:focus {
+    outline: none; //remove default focus outline (blue rectangle).
     transform: translateY(-.1rem);
     box-shadow: 0 .5rem 1rem rgba($color-black,.2);
   }

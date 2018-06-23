@@ -1,30 +1,34 @@
 /*
   _utilities.scss holds utility Sass code to perform certain functionality. It
   belongs to the 'base' directory. Utility classes are very simple classes
-  that are to be reused
+  that are to be reused.
+
+  Typically using the !important property is discouraged but for utility sass
+  code, it is fine because they should take precedence when used over inherited
+  properties.
 */
 
 .u-center-text {
-  text-align: center;
+  text-align: center !important;
 }
 
 .u-margin-bottom-big {
-  margin-bottom: 8rem;
+  margin-bottom: 8rem !important;
 }
 
 .u-margin-bottom-medium {
-  margin-bottom: 4rem;
+  margin-bottom: 4rem !important;
 }
 
 .u-margin-bottom-small {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem !important;
 }
 
 .u-margin-top-big {
-  margin-top: 8rem;
+  margin-top: 8rem !important;
 }
 
 .u-margin-top-huge {
-  margin-top: 10rem;
+  margin-top: 10rem !important;
 }
 

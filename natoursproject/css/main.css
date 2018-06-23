@@ -199,25 +199,29 @@ body {
 /*
   _utilities.scss holds utility Sass code to perform certain functionality. It
   belongs to the 'base' directory. Utility classes are very simple classes
-  that are to be reused
+  that are to be reused.
+
+  Typically using the !important property is discouraged but for utility sass
+  code, it is fine because they should take precedence when used over inherited
+  properties.
 */
 .u-center-text {
-  text-align: center; }
+  text-align: center !important; }
 
 .u-margin-bottom-big {
-  margin-bottom: 8rem; }
+  margin-bottom: 8rem !important; }
 
 .u-margin-bottom-medium {
-  margin-bottom: 4rem; }
+  margin-bottom: 4rem !important; }
 
 .u-margin-bottom-small {
-  margin-bottom: 1.5rem; }
+  margin-bottom: 1.5rem !important; }
 
 .u-margin-top-big {
-  margin-top: 8rem; }
+  margin-top: 8rem !important; }
 
 .u-margin-top-huge {
-  margin-top: 10rem; }
+  margin-top: 10rem !important; }
 
 /*
   _button.scss is the Sass code responsible for the button component. It is a self
@@ -233,11 +237,22 @@ body {
   In our case, the state should be the same for both, hence the comma separation and singular block
 */
   /*
+    Pseudo-class 'hover' applied when you have a mouseover.
+  */
+  /*
+    Pseudo-class 'active' applied when the element is clicked
+
+    The 'focus' pseudo class was added for the <button> element
+    in the booking form. Essentially to remove the default
+    focus outline (blue rectangle) and replaced with the active
+    effect.
+   */
+  /*
     'after' pseudo-element adds a virtual element after the actual element is selected. This virtual element can also be styled
      The virtual element is treated as a child of the element itself, therefore using percentages as sizing values (see height/width settings below)
      the virtual element is sized exactly as the element itself.
   */ }
-  .btn:link, .btn:visited {
+  .btn, .btn:link, .btn:visited {
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
@@ -257,9 +272,13 @@ body {
     /*
       Aside: display: inline; inline elements respect left, right and margins but NOT top and bottom. They cannot have a width and height set.
       They allow other elements to sit to their left and right.
-     */ }
+     */
+    /*
+      Change for the <button> element.
+     */
+    border: none;
+    cursor: pointer; }
   .btn:hover {
-    /*Pseudo-class 'hover' applied when you have a mouseover */
     transform: translateY(-0.3rem);
     /*move the element up from bottom -> top */
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
@@ -270,8 +289,8 @@ body {
       /* doubles the size of the element */
       opacity: 0;
       /*Set visibility to 0, in an animation this looks like a fade*/ }
-  .btn:active {
-    /*Pseudo-class 'active' applied when the element is clicked */
+  .btn:active, .btn:focus {
+    outline: none;
     transform: translateY(-0.1rem);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
   .btn--white {
@@ -685,6 +704,18 @@ body {
      IMPORTANT: You can only select siblings that appear after
      the current element. From the current element it is NOT
      possible to select previous sibling elements in the HTML.
+   */
+  /*
+    The custom radio button
+   */
+  /*
+    Use the checked pseudo class available to all radio buttons to determine
+    whether the custom button should have the inner circles displayed, i.e.
+    selected.
+    The selector below first selects the radio button once in a checked
+    state. It then selects the sibling element, i.e. the radio-label and
+    finally it selects the child, i.e. the span elements 'after' state
+    aka our custom radio button 'after' state defined on line 104.
    */ }
   .form__group {
     margin-bottom: 2rem; }
@@ -703,6 +734,7 @@ body {
     border-bottom: 3px solid transparent;
     width: 90%;
     display: block;
+    transition: all .3s;
     /*
     A pseudo element (represented by 2 colons). They represent
     things that are actually on the webpage.
@@ -726,6 +758,39 @@ body {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4rem); }
+  .form__radio-group {
+    width: 49%;
+    display: inline-block; }
+  .form__radio-label {
+    font-size: 1.6rem;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem; }
+  .form__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid #55c57a;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -.4rem; }
+    .form__radio-button::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #55c57a;
+      opacity: 0; }
+  .form__radio-input:checked ~ .form__radio-label .form__radio-button:after {
+    opacity: 1; }
+  .form__radio-input {
+    display: none; }
 
 /*
   _bg-video.scss is the Sass code responsible for the adding the background image to
