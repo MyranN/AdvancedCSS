@@ -61,5 +61,8 @@
 
 .section-stories {
   padding: 15rem 0;
-  background-color: $color-grey-light-1; //tempoary. Will be replaced with video background
+  //Set position relative in order for bg-video container
+  // (the child element) to be placed correctly which uses
+  //absolute positioning.
+  position: relative;
 }

@@ -1,0 +1,35 @@
+/*
+  _bg-video.scss is the Sass code responsible for the adding the background image to
+  the stories section. It is a self contained reusable component. It therefore
+  belongs to the 'components' directory.
+ */
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  z-index: -1; //ensure bg-video is behind everything.
+  opacity: .15;
+
+  overflow: hidden; //if an element overflows, hide it.
+
+  &__content {
+    height: 100%;
+    width: 100%;
+
+    /*
+      The settings above will not work on their own. This is
+      because simply adjusting the height and width will force
+      the browser to resize but only whilst maintaining the
+      aspect ratio of the video.
+      The property below fixes this. It is similar to the
+      background cover setting. It will fill the parent element
+      while maintaining the aspect ratio. Anything that goes
+      outside of the parent element is clipped.
+     */
+    object-fit: cover;
+  }
+}
