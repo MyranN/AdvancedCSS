@@ -597,7 +597,7 @@ body {
   width: 75%;
   margin: 0 auto;
   box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 3px;
   padding: 6rem;
   padding-left: 9rem;
@@ -666,6 +666,35 @@ body {
       be applied. A brightness value below 100% is darker. Above is brighter.
      */
     filter: blur(3px) brightness(80%); }
+
+/*
+  _bg-video.scss is the Sass code responsible for the adding the background image to
+  the stories section. It is a self contained reusable component. It therefore
+  belongs to the 'components' directory.
+ */
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .15;
+  overflow: hidden; }
+  .bg-video__content {
+    height: 100%;
+    width: 100%;
+    /*
+      The settings above will not work on their own. This is
+      because simply adjusting the height and width will force
+      the browser to resize but only whilst maintaining the
+      aspect ratio of the video.
+      The property below fixes this. It is similar to the
+      background cover setting. It will fill the parent element
+      while maintaining the aspect ratio. Anything that goes
+      outside of the parent element is clipped.
+     */
+    object-fit: cover; }
 
 /*
   _header.scss holds the header related Sass code. It could be considered a component
@@ -889,4 +918,27 @@ body {
 
 .section-stories {
   padding: 15rem 0;
-  background-color: #f7f7f7; }
+  position: relative; }
+
+.section-book {
+  padding: 15rem 0;
+  background-image: linear-gradient(to right bottom, #7ed56f, #28b485); }
+
+.book {
+  /*
+    Specifying a gradient that sits on top of the image. The first arg of the
+    linear-gradient is the direction. This can be provided in words, i.e.
+    "to right bottom" or it can be specified in degrees. By default the gradient is
+    bottom to top but by rotation this goes from left to right.
+    The angle of 105 degrees ends up producing the diagonal line.
+    The linear gradient allows you to specify multiple colors and at what percentage
+    of the image that gradient should extend to. So below, the gradient start at 0%
+    width with a white color. Then at 50% the color is also white. So there is a
+    white-to-white gradient from 0 to 50. Then from 50% onwards, there is no gradient,
+    i.e, complete transparency to give the end result.
+   */
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 50%), url(../img/nat-10.jpg);
+  background-size: cover;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  height: 50rem; }
