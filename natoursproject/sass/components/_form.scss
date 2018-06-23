@@ -1,0 +1,78 @@
+/*
+  _form.scss holds the Sass code related to the booking form. It belongs to the
+   'component' directory as it is a reusable and independent.
+*/
+
+.form {
+
+  &__group {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    /*
+      Input elements don't inherit font properties so
+      we set it to inherit automatically.
+     */
+    font-family: inherit;
+    color: inherit;
+
+    padding: 1.5rem 2rem; //always give more on the sides for inputs
+    border-radius: 2px;
+    background-color: rgba($color-white, .5);
+    border: none;
+    //added to ensure resize doesn't happen when focussed
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all .3s;
+
+    /*
+    A pseudo element (represented by 2 colons). They represent
+    things that are actually on the webpage.
+   */
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, .1);
+      border-bottom: 3px solid $color-primary;
+
+      &:invalid {//invalid pseudo class on focussed element
+        border-bottom: 3px solid $color-secondary-dark
+      }
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    display: block;
+    transition: all .3s;
+  }
+
+  /*
+    Styling on the label element when the input placeholder is
+    shown. The label is an adjacent sibling element of the
+    input element. By 'adjacent' we mean an element that
+    appears immediately after.
+    There are 2 sibling selectors.
+      ~ == general sibling selector. I.e. selects any sibling
+           of the current element.
+      + == adjacent sibling selector
+
+     IMPORTANT: You can only select siblings that appear after
+     the current element. From the current element it is NOT
+     possible to select previous sibling elements in the HTML.
+   */
+  &__input:placeholder-shown + &__label {
+    opacity: 0; //opacity is required for the animation
+    visibility: hidden; //this hides the element but can't animate on it.
+    transform: translateY(-4rem); //initial state of label when the placeholder is visible.
+  }
+}

@@ -668,6 +668,66 @@ body {
     filter: blur(3px) brightness(80%); }
 
 /*
+  _form.scss holds the Sass code related to the booking form. It belongs to the
+   'component' directory as it is a reusable and independent.
+*/
+.form {
+  /*
+    Styling on the label element when the input placeholder is
+    shown. The label is an adjacent sibling element of the
+    input element. By 'adjacent' we mean an element that
+    appears immediately after.
+    There are 2 sibling selectors.
+      ~ == general sibling selector. I.e. selects any sibling
+           of the current element.
+      + == adjacent sibling selector
+
+     IMPORTANT: You can only select siblings that appear after
+     the current element. From the current element it is NOT
+     possible to select previous sibling elements in the HTML.
+   */ }
+  .form__group {
+    margin-bottom: 2rem; }
+  .form__input {
+    font-size: 1.5rem;
+    /*
+      Input elements don't inherit font properties so
+      we set it to inherit automatically.
+     */
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    /*
+    A pseudo element (represented by 2 colons). They represent
+    things that are actually on the webpage.
+   */ }
+    .form__input::-webkit-input-placeholder {
+      color: #999; }
+    .form__input:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+      border-bottom: 3px solid #55c57a; }
+      .form__input:focus:invalid {
+        border-bottom: 3px solid #ff7730; }
+  .form__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    display: block;
+    transition: all .3s; }
+  .form__input:placeholder-shown + .form__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem); }
+
+/*
   _bg-video.scss is the Sass code responsible for the adding the background image to
   the stories section. It is a self contained reusable component. It therefore
   belongs to the 'components' directory.
@@ -870,7 +930,7 @@ body {
 
 /*
   _home.scss holds the Sass code related to the home page or landing page of the
-  website. It belongs to the 'pshrd' directory as it is Sass code related to a
+  website. It belongs to the 'pages' directory as it is Sass code related to a
   particular page.
 */
 .section-about {
@@ -933,8 +993,8 @@ body {
     The angle of 105 degrees ends up producing the diagonal line.
     The linear gradient allows you to specify multiple colors and at what percentage
     of the image that gradient should extend to. So below, the gradient start at 0%
-    width with a white color. Then at 50% the color is also white. So there is a
-    white-to-white gradient from 0 to 50. Then from 50% onwards, there is no gradient,
+    width with a white color. Then at 50% width,the color is also white. So there is a
+    white-to-white gradient from 0% to 50%. Then from 50% onwards, there is no gradient,
     i.e, complete transparency to give the end result.
    */
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 50%), url(../img/nat-10.jpg);
@@ -942,3 +1002,6 @@ body {
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
   height: 50rem; }
+  .book__form {
+    width: 50%;
+    padding: 6rem; }
