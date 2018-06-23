@@ -589,6 +589,45 @@ body {
     font-weight: 100; }
 
 /*
+  _story.scss is the Sass code responsible for the user stories (trapezoid boxes with
+  circular photos) displayed in the 'Stories' section. It is a self contained reusable
+  component. It therefore belongs to the 'components' directory.
+ */
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: 1.6rem; }
+  .story__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    /*
+      Using the shape-outside property to wrap the other elements around it. Similar
+      to the polygon function used when clipping, we're using the circle function
+      to define the circle. The first arg is the radius. If you specify 50%, it
+      will be half of the containing element, in this case that will be 15/2 = 7.5rem.
+      The diameter will therefore be 2*radius which is the size of the enclosing
+      element, i.e. 15rem;
+      The second arg is the co-ordinate of the centre of the circle. Again, by making
+      it 50% 50%, it exactly in the middle.
+      The shape-outside property only works if it is FLOATED and has DEFINED DIMENSIONS,
+      i.e. the width and height are specified.
+     */
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem); }
+  .story__img {
+    height: 100%;
+    width: 100%; }
+
+/*
   _header.scss holds the header related Sass code. It could be considered a component
   as it is reusable independent Sass code. However, it belongs to the 'layouts'
   directory because a header is related to the layout. This is of course subjective.
@@ -807,3 +846,7 @@ body {
   background-color: #f7f7f7;
   padding: 25rem 0 15rem 0;
   margin-top: -10rem; }
+
+.section-stories {
+  padding: 15rem 0;
+  background-color: #f7f7f7; }
