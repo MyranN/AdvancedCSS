@@ -15,7 +15,12 @@
 <body>
     <div class="navigation">
         <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
-        <label for="navi-toggle" class="navigation__button">MENU</label>
+        <label for="navi-toggle" class="navigation__button">
+            <!-- 3 lines in button. The middle line is span element. The first
+            line will be the span element with the 'before' pseudo class. The last
+            line will be the span element with the 'after' pseudo class.-->
+            <span class="navigation__icon">&nbsp;</span>
+        </label>
         <div class="navigation__background">&nbsp;</div>
 
         <!--The navigation screen that appears when the toggle is clicked-->

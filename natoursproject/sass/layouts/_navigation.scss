@@ -22,6 +22,9 @@
     border-radius: 50%;
     z-index: 2000;
     box-shadow: 0 1rem 3rem rgba($color-black, .1);
+
+    text-align: center; //moves the button icon (the 3 lines) to the middle.
+    cursor: pointer;
   }
 
   /*
@@ -143,6 +146,7 @@
     }
   }
 
+  //Navigation functionality
   /*
       Checkbox hack. Select the background when the original checkbox is
       checked.
@@ -154,5 +158,74 @@
   &__checkbox:checked ~ &__nav {
     opacity: 1;
     width: 100%;
+  }
+
+  //Navigation button icon
+  /*
+    The navigation button is made of 3 lines. The middle line is the span
+    element in the html. The first line is the 'before' pseudo element and
+    the last line is the 'after' pseudo element.
+    When the button is clicked, the span element or middle line disappears
+    and the first and last lines rotate to create a cross.
+   */
+  &__icon {
+
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    //Position the before and after around the icon (span element aka middle line)
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s;
+    }
+
+    &::before { top: -.8rem; } //move the before .8rem up (i.e. above the span)
+    &::after { top: .8rem; } //move the after .8rem down (i.e. below the span)
+  }
+
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  //select the checkbox when checked, then the direct sibling button and it's child icon.
+  &__checkbox:checked + &__button &__icon {
+    /*
+      We want to keep the position of this span/middle line so that the
+      before and after lines which are positioned in relation to the
+      middle line, do not change.
+      We therefore only change the color of the line.
+     */
+    background-color: transparent;
+  }
+
+  /*
+    rotate the first and last lines and move them so the lines cross
+    can also use the transform-origin property to specify which point the
+    rotation happens around.
+   */
+  &__checkbox:checked + &__button &__icon::before {
+    transform: rotate(135deg); //rotate 3/4 of a circle (45 * 3) to make the transformation longer
+    top: 0;
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    transform: rotate(-135deg);//rotate 3/4 of a circle (45 * 3)
+    top: 0;
   }
 }

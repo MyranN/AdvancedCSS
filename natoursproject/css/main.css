@@ -1016,7 +1016,19 @@ body {
   /*
       Checkbox hack. Select the background when the original checkbox is
       checked.
-     */ }
+     */
+  /*
+    The navigation button is made of 3 lines. The middle line is the span
+    element in the html. The first line is the 'before' pseudo element and
+    the last line is the 'after' pseudo element.
+    When the button is clicked, the span element or middle line disappears
+    and the first and last lines rotate to create a cross.
+   */
+  /*
+    rotate the first and last lines and move them so the lines cross
+    can also use the transform-origin property to specify which point the
+    rotation happens around.
+   */ }
   .navigation__checkbox {
     display: none; }
   .navigation__button {
@@ -1028,7 +1040,9 @@ body {
     right: 6rem;
     border-radius: 50%;
     z-index: 2000;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1); }
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer; }
   .navigation__background {
     height: 6rem;
     width: 6rem;
@@ -1115,6 +1129,41 @@ body {
   .navigation__checkbox:checked ~ .navigation__nav {
     opacity: 1;
     width: 100%; }
+  .navigation__icon {
+    position: relative;
+    margin-top: 3.5rem; }
+    .navigation__icon, .navigation__icon::before, .navigation__icon::after {
+      width: 3rem;
+      height: 2px;
+      background-color: #333;
+      display: inline-block; }
+    .navigation__icon::before, .navigation__icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s; }
+    .navigation__icon::before {
+      top: -.8rem; }
+    .navigation__icon::after {
+      top: .8rem; }
+  .navigation__button:hover .navigation__icon::before {
+    top: -1rem; }
+  .navigation__button:hover .navigation__icon::after {
+    top: 1rem; }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon {
+    /*
+      We want to keep the position of this span/middle line so that the
+      before and after lines which are positioned in relation to the
+      middle line, do not change.
+      We therefore only change the color of the line.
+     */
+    background-color: transparent; }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::before {
+    transform: rotate(135deg);
+    top: 0; }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::after {
+    transform: rotate(-135deg);
+    top: 0; }
 
 /*
   _footer.scss holds the footer related Sass code. It could be considered a component
