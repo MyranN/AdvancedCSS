@@ -331,6 +331,10 @@
                                          on the label still selects the actual hidden radio button -->
                                     <input type="radio" class="form__radio-input" id="small" name="size">
                                     <label for="small" class="form__radio-label">
+                                        <!--custom button needs to live inside the label
+                                        so that when the label is clicked (or the custom button because
+                                        it is included as a part of the label), it triggers the check
+                                        on the original radio button-->
                                         <span class="form__radio-button"></span>
                                         Small tour group
                                     </label>
