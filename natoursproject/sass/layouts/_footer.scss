@@ -1,0 +1,71 @@
+/*
+  _footer.scss holds the footer related Sass code. It could be considered a component
+  as it is reusable independent Sass code. However, it belongs to the 'layouts'
+  directory because a footer is related to the layout. This is of course subjective.
+ */
+
+.footer {
+  background-color: $color-grey-dark-3;
+  padding: 10rem 0;
+  font-size: 1.4rem;
+
+  &__logo-box {
+    /*
+      <img> is an inline element and so behaves like text. We can
+      therefore center it as we do with text.
+     */
+    text-align: center;
+    margin-bottom: 8rem;
+  }
+
+  &__logo {
+    width: 15rem;
+    height: auto;
+  }
+
+  &__navigation {
+    border-top: 1px solid $color-grey-dark;
+    padding-top: 2rem;
+    display: inline-block; //Ensure the line only goes as far as the content
+  }
+
+  &__list {
+    list-style: none; //remove default styling
+
+  }
+
+  &__item {
+    display: inline-block; //we want list items side by side without floating
+
+    &:not(:last-child) {
+      margin-right: 1.5rem; //Apply margin except last item
+    }
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      background-color: $color-grey-dark-3;
+      color: $color-grey-light-1;
+      text-decoration: none; //remove default text decoration on links
+      text-transform: uppercase;
+      display: inline-block;
+      transition: all .2s;
+    }
+
+    &:hover,
+    &:active {
+      color: $color-primary;
+      box-shadow: 0 1rem 2rem rgba($color-black, .4);
+    }
+  }
+
+  &__copyright {
+    color: $color-grey-light-1;
+    border-top: 1px solid $color-grey-dark;
+    padding-top: 2rem;
+    display: inline-block; //Ensure the line only goes as far as the content
+    width: 80%;
+    float: right;
+  }
+}
