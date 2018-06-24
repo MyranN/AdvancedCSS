@@ -993,6 +993,129 @@ body {
   .row .col-3-of-4 {
     width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
 
+.navigation {
+  /*
+    The original checkbox that the custom button is linked to via a label.
+   */
+  /*
+    The toggle button to open the navigation screen.
+   */
+  /*
+    The green circle that sits behind the button so that when the button is
+    clicked, it gives the expanding effect into the navigation screen using
+    a radial gradient/circular gradient.
+   */
+  /*
+    This is the navigation screen. It is a container for navigation list
+    of items.
+    Cover the entire viewport (hence 100vh) with the gradient background.
+   */
+  /*
+    Container for the navigation items. It is centered in the middle.
+   */
+  /*
+      Checkbox hack. Select the background when the original checkbox is
+      checked.
+     */ }
+  .navigation__checkbox {
+    display: none; }
+  .navigation__button {
+    background-color: #fff;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1); }
+  .navigation__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    z-index: 1000;
+    /*
+      Fixed essentially means it doesn't move as you scroll
+      the page. It's also like absolute in that it takes the
+      element out of the flow and can be positioned using
+      the top,left,right and bottom properties.
+     */
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    /*
+      Radial gradients starts in the middle and expands outwards in a circle.
+     */
+    background-image: radial-gradient(#7ed56f, #28b485);
+    /*
+      Easing function to specify how much change occurs over time. The easing
+      function is the cubic-bezier function (can be googled for various numbers
+      for the bezier curve you want)
+     */
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
+  .navigation__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1500;
+    opacity: 0;
+    width: 0;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+  .navigation__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+    width: 100%; }
+  .navigation__item {
+    margin: 1rem; }
+  .navigation__link {
+    /*
+      Need to review why this works
+     */ }
+    .navigation__link:link, .navigation__link:visited {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      /*
+      Use solid color gradient to give white angled box animation effect.
+      First rotate by 120deg to give slope/angled box. Then provide gradient
+      colors at various widths. At 0% width, the color is TRANSPARENT.
+      It is also TRANSPARENT at 50%. So it is a solid gradient from 0-50%.
+      Then 50% onwards, it is WHITE therefore another solid gradient from
+      50-100.
+      If the background size initial state was 100%, then the TRANSPARENT
+      and WHITE sides would occupy 50% of container (in this case, the list
+      item) as per the linear gradient setting. If the background size is
+      set to 200%, the WHITE is completely gone. In fact it has just
+      expanded outside of the container and is no longer visible.
+      This is the crux of the animation. I.e. the background position can
+      be adjusted when hovering to bring the WHITE side back into view
+      (back into the container). See hover pseudo class below.
+       */
+      background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
+      background-size: 220%;
+      transition: all .4s; }
+      .navigation__link:link span, .navigation__link:visited span {
+        margin-right: 1.5rem;
+        display: inline-block; }
+    .navigation__link:hover, .navigation__link:active {
+      background-position: 100%;
+      color: #55c57a;
+      transform: translateX(1rem); }
+  .navigation__checkbox:checked ~ .navigation__background {
+    transform: scale(60); }
+  .navigation__checkbox:checked ~ .navigation__nav {
+    opacity: 1;
+    width: 100%; }
+
 /*
   _footer.scss holds the footer related Sass code. It could be considered a component
   as it is reusable independent Sass code. However, it belongs to the 'layouts'

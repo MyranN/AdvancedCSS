@@ -13,6 +13,33 @@
     <title>Natours | Exciting tours for adventurous people</title>
 </head>
 <body>
+    <div class="navigation">
+        <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+        <label for="navi-toggle" class="navigation__button">MENU</label>
+        <div class="navigation__background">&nbsp;</div>
+
+        <!--The navigation screen that appears when the toggle is clicked-->
+        <nav class="navigation__nav">
+            <ul class="navigation__list">
+                <li class="navigation__item">
+                    <a href="#" class="navigation__link"><span>01</span>About Natours</a>
+                </li>
+                <li class="navigation__item">
+                    <a href="#" class="navigation__link"><span>02</span>Your benefits</a>
+                </li>
+                <li class="navigation__item">
+                    <a href="#" class="navigation__link"><span>03</span>Popular tours</a>
+                </li>
+                <li class="navigation__item">
+                    <a href="#" class="navigation__link"><span>04</span>Stories</a>
+                </li>
+                <li class="navigation__item">
+                    <a href="#" class="navigation__link"><span>05</span>Book now</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
     <header class="header"> <!-- header is a block in the BEM structure as it is a standlone element -->
         <div class="header__logo-box"> <!-- logo-box is an element as it has no standalone purpose and can only exist as a part of the block -->
             <img src="img/logo-white.png" alt="Logo" class="header__logo">  <!-- alt specifies text if img doesn't load but also for search engine optimsation -->
