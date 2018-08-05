@@ -23,6 +23,9 @@
   to be 'fixed' to clear the floats.
  */
 /*
+  Mixin used to center an element.
+ */
+/*
   _variables.scss holds the Sass variables of a project. It belongs to the 'abstract'
   directory which contains Sass code that is not output to a CSS file.
  */
@@ -820,6 +823,106 @@ body {
       outside of the parent element is clipped.
      */
     object-fit: cover; }
+
+/*
+  _popup.scss holds the Sass code related to the popup box when Book Now is clicked on the
+  rotating cards. It belongs to the 'component' directory as it is a reusable and independent.
+*/
+.popup {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  /*
+    Hide the popup by default. Could do this with 'display: none'. However,
+    this doesn't allow for animation.
+  */
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+  /*
+    Using CSS to go to a new URL. In the html clicking on the tour card 'Book now' button, will
+    go to the popup-id div. When the url changes to having the anchor in this case 'popup-id',
+    e.g "//www.mypage.com/#popup-id", then this 'target' pseudo class is applied.
+   */ }
+  .popup:target {
+    opacity: 1;
+    visibility: visible; }
+  .popup__close:link, .popup__close:visited {
+    color: #777;
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    font-size: 3rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .2s;
+    line-height: 1; }
+  .popup__close:hover {
+    color: #55c57a; }
+  .popup__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    background-color: #fff;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    /*
+      Used to ensure that the left and right boxes in the popup have the same
+      height. The parent container (__content) needs to have it's display property
+      to be 'table'.
+      The 'table' display property is a way of simulating a table layout without
+      having to use the 'table' html element.
+     */
+    display: table; }
+  .popup__left {
+    width: 33.333333%;
+    /*
+      Used to ensure that the left and right boxes in the popup have the same
+      height. The parent container (__content) needs to have it's display property
+      to be 'table'. The browser will automatically give table-cells the same
+      height.
+     */
+    display: table-cell; }
+  .popup__right {
+    width: 66.666667%;
+    /*
+      Used to ensure that the left and right boxes in the popup have the same
+      height. The parent container (__content) needs to have it's display property
+      to be 'table'. The browser will automatically give table-cells the same
+      height.
+     */
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem; }
+  .popup__img {
+    display: block;
+    width: 100%; }
+  .popup__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+    /*
+      Column support is relatively new for CSS. Allows
+     */
+    -moz-column-count: 2;
+    -moz-column-gap: 2rem;
+    -moz-column-rule: 1px solid #eee;
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid #eee;
+    /*
+      Will apply a hyphen if word in text goes onto new line.
+     */
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto; }
 
 /*
   _header.scss holds the header related Sass code. It could be considered a component
