@@ -25,3 +25,66 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+// MEDIA QUERY MANAGER
+/*
+  Ranges:             Devices:
+  ------------------------------------------
+  0 - 600px:          PHONE
+  600px - 900px:      TABLET PORTRAIT
+  900px - 1200px:     TABLET HORIZONTAL
+  1200px - 1800px:    NORMAL STYLING DESKTOP
+  > 1800px:           BIG DESKTOP
+ */
+//@mixin respond-phone {
+//  @media(max-width: 600px) {
+//    /*
+//      The content directive allows a block of code to be passed into this mixin when invoked in
+//      the CSS code.
+//     */
+//    @content
+//  }
+//}
+
+/*
+  This is a better mixin to use than above for defining media queries. When this
+  mixin is invoked in the CSS code, the breakpoint size can be passed in.
+  $breakpoint argument choices:
+    - phone
+    - tab-port
+    - tab-land
+    - big-desktop
+
+   It is important to note that rem/ems don't work off the root font-size setting
+   in media queries as they do everywhere else. Rem/em always work off the browser
+   font size. The default browser font-size is 16px.
+   The preferred unit is an 'em' for media queries.
+
+   1em = 16px
+ */
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media(max-width: 37.5em) { //600px/16px = 37.5em
+      @content; //see mixin example declaration above for @content definition
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media(max-width: 56.25em) { //900px/16px = 56.25em
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    @media(max-width: 75em) { //1200px/16px = 75em
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    @media(min-width: 112.5em) { //1800px/16px = 112.5em
+      @content;
+    }
+  }
+
+}

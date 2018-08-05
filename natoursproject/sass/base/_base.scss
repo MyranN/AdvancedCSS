@@ -29,6 +29,31 @@ html {
                        set as a percentage. Default browser settings are 16px for font-size, so in order to maintain
                        1rem = 10px, we do: 10 / 16 * 100 to give us the percentage.
                      */
+
+  /*
+    Because the page uses rems which are relative to the root font-size above,
+    i.e 62.5%. By changing the font-size for the various device widths, we can
+    automatically scale our entire page because most of it uses rem measurements.
+
+    Also below, the media query mixins are specified in descending order so that if
+    there conflicts (i.e the device width is 500px, then 500px < 900px and 500px < 1200px),
+    then the smaller size media query takes precedence because it is the last one defined.
+   */
+  @include respond(big-desktop) {
+    font-size: 75%; //If we define 1rem = 12px, then 12/16 = 75%
+  }
+
+  @include respond(tab-land) {
+    font-size: 56.25%; //If we define 1rem = 9px, then 9/16 = 56.25%
+  }
+
+  @include respond(tab-port) {
+    font-size: 50%; //If we define 1rem = 8px, then 8/16 = 50%
+  }
+
+  @include respond(phone) { //using the media query mixin
+    font-size: 50%; //passing in the block of code for the @content directive
+  }
 }
 
 body { /* 'var' defines css styling for elements

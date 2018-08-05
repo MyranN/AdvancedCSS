@@ -1,0 +1,44 @@
+Section 5:
+----------
+
+What are the strategies?
+--------------------------------------------------
+There are 2 design strategies, one where a site is designed for the desktop first,
+called 'DesktopFirst' and the second is 'MobileFirst', which starts with designing
+for a mobile phone. The latter is sometimes preferred because it forces the designer
+to remove all unnecessary features that can't fit on the screen.
+
+What are media queries?
+--------------------------------------------------
+Media queries come in 2 forms. MAX-WIDTH and MIN-WIDTH. The MAX-WIDTH query checks
+if the current viewport width is less than or equal to some given size. If it is,
+then the CSS code within the media query is applied.
+Similarly for MIN-WIDTH, if the viewport width is greater or equal to a given size,
+then the CSS code is applied.
+
+MAX-WIDTH media queries are used for DesktopFirst strategies. MIN-WIDTH is used for
+MobileFirst strategies.
+
+Which media queries take precedence?
+--------------------------------------------------
+Media queries don't add any importance, so code ordering matters. This is why media queries are
+defined last.
+This is how conflicts are resolved with regards to which CSS is applied for a given size.
+
+How to select breakpoints?
+--------------------------------------------------
+Breakpoints specify the viewport width size at which media queries are applied. I.e. They
+determine when a site is resized/re-adjusted.
+The bad way of doing this is to just use the width of common devices (typically Apple) products.
+I.e. the smallest breakpoint is the width of an iphone. The medium breakpoints would be the
+ipad in vertical and horizontal positions and finally the largest breakpoint could be the macbook.
+    phone(600px)---------ipad_vert(900px)--------ipad_hor(1200px)--------macbook(1500px)
+
+A better approach but still not perfect would be to take multiple products, not just Apple and
+group the device widths in a logical (similar device widths) such that a breakpoint will cover
+multiple devices. E.g. the smallest breakpoint could cover various phones if you know the largest
+of the popular phones to be a certain size.
+
+The best approach is to start with either DesktopFirst or MobileFirst strategies and increment/
+decrement the width size and see if the site breaks/doesn't look good. If the site breaks, you
+add a breakpoint.
