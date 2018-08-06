@@ -62,4 +62,10 @@ body { /* 'var' defines css styling for elements
     border-box means the width and height include the content, padding and border.
   */
   box-sizing: border-box;
+  padding: 3rem; /*applies padding in all sides of the body element. Child elements do not inherit padding settings */
+
+
+  @include respond(tab-port) {
+    padding: 0; //If we define 1rem = 8px, then 8/16 = 50%
+  }
 }
