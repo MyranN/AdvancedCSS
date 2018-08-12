@@ -1,0 +1,20 @@
+Section 5:
+----------
+
+How to apply CSS stylings only if it's supported using Feature Queries
+----------------------------------------------------------------------
+In order to apply CSS styling if the browser allows for it, we use the
+@supports feature query. Within our CSS code, we can have the following:
+
+@supports(-webkit-backdrop-filter: blur(10px)) or(backdrop-filter: blur(10px)) {
+
+       -webkit-backdrop-filter: blur(10px);
+       backdrop-filter: blur(10px);
+       background-color: rgba($color-black, .3);
+}
+
+The above CSS code only applies the CSS within the braces if the browser
+supports the condition. In this case, we're asking if the browser supports
+a blur backdrop filter. If so, it applies the backdrop filter and the background
+color change.
+

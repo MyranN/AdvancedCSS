@@ -51,6 +51,7 @@
     The ',' in the media query acts as an OR statement, i.e if the width is > 2000 OR etc.
    */
   @media (min-resolution: 192dpi) and (min-width: 37.5em), //600px = 37.5em
+         (-webkit-device-pixel-ratio: 2), //Safari equivalent of min-resolution
          (min-width: 125em){ //2000px = 125em
     //If the resolution is at least 192dpi then use the large 'hero.jpg' image.
     background-image: linear-gradient(
