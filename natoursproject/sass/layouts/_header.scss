@@ -16,7 +16,7 @@
                   to right bottom,
                   rgba($color-primary-light, 0.8), //In regular css, you can't specify variables in rgba functions. You can in sass.
                   rgba($color-primary-dark,0.8)),
-  url('../img/hero.jpg');
+                  url('../img/hero-small.jpg');
   background-size: cover; /* 'cover' fits the entire viewport with the element this class is applied to */
   background-position: top; /* property sets the starting position of a background image, top-left being the default. If only one value is given, the second is 'center'*/
 
@@ -34,9 +34,30 @@
   */
   position: relative;
 
+  /*
+    Media query based on viewport width
+   */
   @include respond(phone) {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  /*
+    Media query based on resolution.
+    dpi stands for dots per inch. 192 is what a macbook retina display has.
+    The below query states, when the resolution is 192dpi, i.e. a hi-res screen with
+    2x pixel density and the width of the screen is at least 600px then use the
+    larger image.
+    The ',' in the media query acts as an OR statement, i.e if the width is > 2000 OR etc.
+   */
+  @media (min-resolution: 192dpi) and (min-width: 37.5em), //600px = 37.5em
+         (min-width: 125em){ //2000px = 125em
+    //If the resolution is at least 192dpi then use the large 'hero.jpg' image.
+    background-image: linear-gradient(
+                    to right bottom,
+                    rgba($color-primary-light, 0.8), //In regular css, you can't specify variables in rgba functions. You can in sass.
+                    rgba($color-primary-dark,0.8)),
+                    url('../img/hero.jpg');
   }
 
   /*

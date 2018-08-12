@@ -79,3 +79,23 @@ it should occupy is 300px.
 Essentially, you're giving as much info as possible to the browser for it to decide which image is best for the
 given conditions. So when the browser loads the image it knows it's current viewport width
 and its pixel density and will choose an image appropriately.
+
+CSS Responsive Images:
+
+In order to have a responsive image via css, simply create a media query to switch to
+using a different image/smaller image etc when the media query is satisfied. A media
+query can specify both a width condition and a resolution condition as shown below.
+Below, the media query states when the resolution is 192dpi, i.e. a hi-res screen with
+2x pixel density, and the width of the screen is at least 600px then use the larger image.
+Or if the width is at least 2000px then also use the larger image.
+The ',' in the media query acts as an OR statement
+
+ @media (min-resolution: 192dpi) and (min-width: 37.5em), //600px = 37.5em
+         (min-width: 125em){ //2000px = 125em
+    //If the resolution is at least 192dpi then use the large 'hero.jpg' image.
+    background-image: linear-gradient(
+                    to right bottom,
+                    rgba($color-primary-light, 0.8), //In regular css, you can't specify variables in rgba functions. You can in sass.
+                    rgba($color-primary-dark,0.8)),
+                    url('../img/hero.jpg');
+  }
