@@ -1,0 +1,81 @@
+Section 5:
+----------
+
+What are the responsive images?
+--------------------------------------------------
+The goal of responsive images is to serve the right image to the right
+screen size and device in order to avoid downloading unnecessarily large
+images on smaller screens.
+
+When to use responsive images?
+--------------------------------------------------
+There are 3 use cases.
+    1) Resolution switching, where you decrease the image resolution for
+       a smaller screen.
+    2) Density switching, where the pixel density (number of pixels per cm/
+       inch) is taken into consideration. Hi-res screens like MacBook Retina
+       displays and phones for example, use 2 pixels to display one pixel
+       of an image/site. Low-res screens like standard PC monitors use 1 pixel
+       to display 1 pixel of an image/site.
+       Density switching is therefore using an image with double the res for
+       hi-res screens or halving the res for low-res screens.
+    3) Art direction, where you serve a completely different image for smaller
+       screen sizes. E.g. You remove details from the original image that
+       aren't too important and serve this smaller image instead.
+
+What type of images need to be responsive?
+--------------------------------------------------
+There are two ways of including an image in your website.
+    1) <img> tags are used for html images, where you specify a source
+    2) CSS properties can also be used for images such as 'background-image'.
+
+Both of these types of images are handled differently when made to be responsive.
+
+HTML Density Switching:
+--------------------------
+For HTML images, you can use the 'srcset' attribute to provide a hi-res and a low-res
+version of images (density switching). Denisty descriptors are then provided for each
+to signify which screens they are applicable to.
+E.g.
+    <img srcset="img-low-res.jpg 1x, img-high-res.jpg 2x"> //1x and 2x are density
+                                                          //descriptors
+
+HTML Art Direction:
+--------------------------
+If using Art Direction for HTML images then the picture tag needs to be used. Within
+the picture tag, you specify a source with a media query attribute. This attribute
+basically says use the source img if the device width is the specified media query.
+E.g.
+       <!-- Using art direction to specify a new image for low and hi res screens -->
+       <picture class="footer__log">
+           <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x"
+                   media="(max-width: 37.5em)">
+           <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo">
+       </picture>
+
+The img tag in the above example is the default. You'll notice that in both case, there is
+density switching being used, i.e. a low-res and high-res version of all images.
+To summarise the exampled above: The picture tag allows multiple image sources to be specifed.
+The source tag with it's media query tells the browser which image set to use for a given screen width.
+Anything bigger than the specified media query will force the browser to use the image set in the img tag
+which acts as a default img set.
+
+HTML Resolution Switching:
+--------------------------
+In order to add resolution switching, use the img tag as follows:
+     <img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w"
+          sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px"
+          alt="Photo 1"
+          class="composition__photo composition__photo--p1"
+          src="img/nat-1-large.jpg"> <!-- add the src in case browser can't identify srcset/sizes attributes because it's old etc-->
+
+The srcset attribute in the above example, now takes a width descriptor instead of a density desriptor.
+The width descriptor specifies the width of the associated img in terms of pixels. So
+"img/nat-1.jpg" is 300px wide so we give it a width descriptor of 300w.
+Then we specify the sizes attribute. This tells the browser what percentage of the viewport width
+the image should occupy in different device widths. So for a device width or viewport width of 900px,
+the image should occupy 20% of that viewport. For 600, it should occupy 30% and for all others, the default
+it should occupy is 300px.
+Essentially, you're giving as much info as possible to the browser for it to decide which image is best for the
+given conditions. So when the browser loads the image it knows it's current viewport width
+and its pixel density and will choose an image appropriately.

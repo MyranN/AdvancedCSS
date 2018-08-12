@@ -90,9 +90,25 @@
                 <div class="col-1-of-2">
                     <!-- Using BEM notation. Block is 'composition'. Element is 'composition__photo' and Modifier is 'composition__photo--p1'-->
                     <div class="composition">
-                        <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
-                        <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
-                        <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
+
+                        <!--Resolution switching using width descriptor -->
+                        <img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w"
+                             sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px"
+                             alt="Photo 1"
+                             class="composition__photo composition__photo--p1"
+                             src="img/nat-1-large.jpg"> <!-- add the src in case browser can't identify srcset/sizes attributes because it's old etc-->
+
+                        <img srcset="img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w"
+                             sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px"
+                             alt="Photo 2"
+                             class="composition__photo composition__photo--p2"
+                             src="img/nat-2-large.jpg"> <!-- add the src in case browser can't identify srcset/sizes attributes because it's old etc-->
+
+                        <img srcset="img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w"
+                             sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px"
+                             alt="Photo 3"
+                             class="composition__photo composition__photo--p3"
+                             src="img/nat-3-large.jpg"> <!-- add the src in case browser can't identify srcset/sizes attributes because it's old etc-->
                     </div>
                 </div>
             </div>
@@ -394,7 +410,16 @@
 
     <footer class="footer">
         <div class="footer__logo-box">
-            <img src="img/logo-green-2x.png" alt="Full logo" class="footer_logo">
+
+            <!-- Using art direction to specify a new image for low and hi res screens -->
+            <picture class="footer__log">
+                <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x" media="(max-width: 37.5em)">
+                <!-- Using srcset to provide density switching images, 1x for low-res, 2x for hi-->
+                <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x"
+                     alt="Full logo"
+                     src="img/logo-green-2x.png"> <!--specify src attribute in case old browser can't recognize srcset attribute -->
+            </picture>
+
         </div>
         <div class="row">
             <div class="col-1-of-2">
