@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #ccc;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row-reverse; /* The items are now reversed, starting from the right and going to the left */
+    justify-content: center; /* centers the items in the middle of the row. Space-between evenly separates the items in the row */
+    align-items: baseline; /* The items are centered along the cross axis. stretch will force all items to stretch to the height of the
+                            highest item. Baseline aligns the items according to the text within the items (see adjustment
+                            after i4 class is applied). */
+}
+
+.item {
+    background-color: #f1425d;
+    padding: 30px;
+    margin: 30px;
+    color: #fff;
+    font-size: 40px;
+}
+
+.i2 {
+    height: 200px;
+}
+
+.i4 {
+    font-size: 70px;
+}

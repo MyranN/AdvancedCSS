@@ -1,0 +1,44 @@
+Section 6:
+----------
+
+What is Flexbox?
+--------------------------------------------------
+Flexbox is a new module in CSS3 that makes it easy to align elements to another in different directions and
+orders. The idea behind flexbox is to allow the container to expand and shrink elements to make use of the available
+space. Flexbox replaces the float layout with less, more readable and logical code.
+
+How to use Flexbox?
+--------------------------------------------------
+In order to use Flexbox functionality, you first need a flex container. To create a flex container, simply set
+the display property of the element to 'flex'. E.g
+    <div style="display: flex">
+    </div>
+
+To have a flex container that behaves like an inline element, set the display property to 'flex-inline'.
+    <div style="display: flex-inline">
+    </div>
+
+Child elements of the flex container are called 'Flex Items'. The direction in which the items are laid out in a flex
+container is called the 'Main Axis'. The perpendicular axis to this is called the 'Cross Axis'.
+
+The following container properties can be used to configure a flex box.
+Property            Possible Values                             Description
+flex-direction:     row|row-reverse|column|column-reverse       Determines the main axis direction of the flex items.
+flex-wrap:          nowrap|wrap|wrap-reverse                    Determines if the flex items should wrap on to a new line
+justify-content:    flex-start|flex-end|center|space-between    Determines how the flex items should be displayed along
+                    |space-around|space-evenly                  the main axis.
+align-items:        stretch|flex-start|flex-end|center          Determines how the flex items are displayed along the cross
+                    |baseline                                   axis.
+align-content:      stretch|flex-start|flex-end|center          Determines how the flex items are displayed along the cross
+                    |space-between|space-around                 axis if there are multiple rows of flex items.
+
+The following flex item properties can bbe used to configure a flex box.
+Property            Possible Values                             Description
+align-self:         auto|stretch|flex-start|flex-end|center     Determines how the item is displayed along the cross axis.
+                    |baseline
+order:              0 | <integer>                               Determines where the flex item should appear in the container.
+flex-grow:          0 | <integer>                               Determines how much the flex item can grow
+flex-shrink:        0 | <integer>                               Determines how much the flex item can shrink
+flex-basis:         auto | <length>                             Defines the flex item's base width
+flex:               [0 0 auto]|[<integer><integer><length>      The shorthand for the above 3 properties in the same order
+                                                                i.e. flex: <grow> <shrink> <basis>
