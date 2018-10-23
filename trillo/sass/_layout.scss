@@ -1,0 +1,29 @@
+.container {
+  max-width: 120rem; //1200px
+  margin: 8rem auto; //center the container in the body
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--shadow-dark);
+
+  min-height: 50rem;
+}
+
+.header {
+  height: 7rem;
+  background-color: #fff;
+  border-bottom: var(--color-grey-light-2)
+}
+
+.content { //flex container that holds the sidebar and the main hotel view
+  display: flex;
+}
+
+.sidebar { //flex item for navigation bar
+  background-color: var(--color-grey-dark-1);
+
+  flex: 0 0 18%; //flex basis to specify width, in this case 18%
+}
+
+.hotel-view { //flex item for main view
+  background-color: #fff;
+  flex: 1; //flex grow so that this flex item occupies the remaining 82% (100-18)
+}
