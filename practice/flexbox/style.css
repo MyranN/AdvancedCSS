@@ -14,6 +14,12 @@
     align-items: baseline; /* The items are centered along the cross axis. stretch will force all items to stretch to the height of the
                             highest item. Baseline aligns the items according to the text within the items (see adjustment
                             after i4 class is applied). */
+
+    flex-wrap: wrap; /* This property will push overflowing flex-items onto a new line if they don't fit the viewport */
+
+    height: 1000px;
+    align-content: flex-start; /* aligns the rows in the flex-container across the cross-axis. Removing the space created by
+                                  the container height between the rows. Any space is pushed after the last row.*/
 }
 
 .item {
@@ -22,6 +28,7 @@
     margin: 30px;
     color: #fff;
     font-size: 40px;
+    flex-grow: 1;
 }
 
 .i2 {
@@ -30,4 +37,26 @@
 
 .i4 {
     font-size: 70px;
+    align-self: flex-end; /*This item alone is aligned differently to the other items in the container which have
+                           baseline alignment. */
+    order: -1; /* Property that places the given flex item into the specified position in the flex container. -1 = start
+               because the lowest number goes to the first pos as all other items are defaulted to an order value of 0.*/
+
+    flex-grow: 2; /* The flex grow property stretches the item to occupy as much space as it can. However, the value assigned
+                    only makes sense in relation to the flex-grow property of the other items in the container. For example, in
+                    this case, the value of this item is 2. The other items are all defaulted to 1. Therefore, this item will
+                    be twice the size of the others. */
+
+
+   /*flex-basis: 20%; /* This property is used to set the width of a flex item within the container. This item will occupy
+                      20% of the container width. Everything else will shuffle accordingly. However, if the viewport is reduced
+                      i.e. reduce the window size, then this item will also shrink regardless of the value.
+                      To avoid this, the flex-shrink property can be used*/
+
+    /*flex-shrink: 1; /* This property is used to determine whether an item can shrink. The default value is 1, which means
+                      as the viewport size reduces, the item will shrink regardless of its flex-basis or flex-grow property.
+                      A value of 0  will mean the item is not allowed to shrink*/
+
+    /*flex: 0 1 300px; /* This is shorthand for the flex-grow, flex-shrink and flex-basis properties where each value specified
+                        corresponds accordingly. */
 }
