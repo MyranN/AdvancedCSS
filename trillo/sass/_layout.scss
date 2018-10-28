@@ -11,7 +11,7 @@
   font-size: 1.4rem;
   height: 7rem;
   background-color: #fff;
-  border-bottom: var(--color-grey-light-2);
+  border-bottom: 1px solid var(--color-grey-light-2);
 
   display: flex; //the header element is the flex container for the logo, the seearch bar and the bookmark, chat icons etc.
   justify-content: space-between; //align the flex items along the main axis
