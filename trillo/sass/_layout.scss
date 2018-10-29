@@ -11,7 +11,7 @@
   font-size: 1.4rem;
   height: 7rem;
   background-color: #fff;
-  border-bottom: 1px solid var(--color-grey-light-2);
+  border-bottom: var(--line);
 
   display: flex; //the header element is the flex container for the logo, the search bar and the bookmark, chat icons etc.
   justify-content: space-between; //align the flex items along the main axis
@@ -20,6 +20,27 @@
 
 .content { //flex container that holds the sidebar and the main hotel view
   display: flex;
+}
+
+.detail {
+  display: flex; //show the description and the user reviews side by side
+  padding: 4.5rem;
+  background-color: var(--color-grey-light-1);
+  border-bottom: var(--line);
+}
+
+.description {
+  background-color: #fff;
+  box-shadow: var(--shadow-light);
+  font-size: 1.4rem;
+  padding: 3rem;
+  flex: 0 0 60%; //don't grow, don't shrink, use 60% of container width
+  margin-right: 4.5rem;
+}
+
+.user-reviews {
+  background-color: yellowgreen;
+  flex: 1; //grow and occupy remaining 40% of container
 }
 
 .sidebar { //flex item for navigation bar
@@ -35,8 +56,6 @@
 .hotel-view { //flex item for main view
   //TEST SETTINGS
   background-color: #fff;
-  height: 80rem;
-
 
   flex: 1; //flex grow so that this flex item occupies the remaining 82% (100-18)
 }
