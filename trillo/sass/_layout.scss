@@ -13,7 +13,7 @@
   background-color: #fff;
   border-bottom: 1px solid var(--color-grey-light-2);
 
-  display: flex; //the header element is the flex container for the logo, the seearch bar and the bookmark, chat icons etc.
+  display: flex; //the header element is the flex container for the logo, the search bar and the bookmark, chat icons etc.
   justify-content: space-between; //align the flex items along the main axis
   align-items: center; //align the flex items in the center of the row.
 }
