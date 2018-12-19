@@ -7,9 +7,32 @@
     grid-template-rows: 150px 150px; /* define the height of the number of rows,
                                         in this case there are 2 rows each 150px */
 
-    grid-template-columns: 150px 150px 150px; /* 3 columns of height 150px each */
+    grid-template-rows: repeat(2, 150px); /* another way of defining rows but without
+                                             sizing each one.
+                                             Again, there are 2 rows each of 150px */
 
-    grid-row-gap: 30px; /* Adds row gutters, i.e. areas between rows of size 30px */
+    grid-template-columns: 150px 150px 150px; /* 3 columns of width 150px each */
+
+    grid-template-columns: repeat(2, 150px) 300px; /* 2 columns of width 150px and a third
+                                                      column of 300px */
+
+    grid-template-columns: repeat(2, 150px) 1fr; /* 2 columns of width 150px and a third
+                                                    that occupies a fraction of the available
+                                                    space in the container using the CSS
+                                                    Grid Fractional Unit.*/
+
+    grid-template-columns: repeat(3, 1fr); /* 3 columns equally split in the container */
+
+    grid-template-columns: 1fr 2fr 1fr; /*3 columns, first and last are equal size but
+                                        the second column is twice the size of the first*/
+
+    grid-template-columns: 50% 2fr 1fr; /* 3 columns, first column is 50% of the grid container.
+                                        the remaining space is split into 3 equal parts whereby
+                                        the second column occupies twice the size of the first
+                                        */
+
+
+  grid-row-gap: 30px; /* Adds row gutters, i.e. areas between rows of size 30px */
     grid-column-gap: 50px; /* Adds column gutters, i.e. areas between columns of size 50px */
 
     /*grid-gap: 30px; /*Set row and column gutters to be the same size */
