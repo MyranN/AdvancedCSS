@@ -145,8 +145,8 @@
     transform: scaleY(0);
     transform-origin: center; //this is actually the default even if not explicitly set
     transition: transform .2s, //animation timings of the hover effect
-                width .4s cubic-bezier(1,0,0,1) .2s,
-                background-color .1s;
+    width .4s cubic-bezier(1, 0, 0, 1) .2s,
+    background-color .1s;
   }
 
   &__item:hover::before,
@@ -352,15 +352,18 @@
     margin-right: .7rem;
 
     //Older browsers use the background-image
-    //background-image: url(../img/chevron-thin-right.svg);
-    //background-size: cover;
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover;
 
     //Newer browsers use masks. Masks define an area. Any image over the mask will take the color of the mask
-    background-color: var(--color-primary);
-    -webkit-mask-image: url(../img/chevron-thin-right.svg);
-    -webkit-mask-size: cover;
-    mask-image: url(../img/chevron-thin-right.svg);
-    mask-size: cover;
+    @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+      background-color: var(--color-primary);
+      -webkit-mask-image: url(../img/chevron-thin-right.svg);
+      -webkit-mask-size: cover;
+      mask-image: url(../img/chevron-thin-right.svg);
+      mask-size: cover;
+      background-image: none; //remove background image setting when mask not supported (line 355)
+    }
   }
 }
 
@@ -455,5 +458,69 @@
     color: var(--color-grey-light-2);
     font-family: sans-serif; //override open-sans font.
     z-index: 1;
+  }
+}
+
+/////////////////////////////////////////////////////
+// CALL TO ACTION
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
+
+  &__book-now {
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/////////////////////////////////////////////////////
+// CALL TO ACTION
+.btn {
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: none;
+  background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+  color: #fff;
+  position: relative;
+  overflow: hidden; //the invisible element is outside of button so it's overflow element. Hiding it hides the visible text.
+  cursor: pointer;
+
+  & > * { //select all child elements (i.e. visible/invisible elements)
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    transition: all .2s;
+  }
+
+  &__visible {
+    padding: 2rem 7.5rem;
+  }
+
+  &__invisible {
+    position: absolute;
+    padding: 2rem 0;
+    left: 0;
+    top: -100%; //move the element up the full pixel size of the element
+  }
+
+  &:hover {
+    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark));
+  }
+
+  &:hover &__visible {
+    transform: translateY(100%);
+  }
+
+  &:hover &__invisible {
+    top: 0; //move the invisible element down.
+  }
+
+  &:focus {
+    outline: none;
+    animation: pulsate 1s infinite;
   }
 }
