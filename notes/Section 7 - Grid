@@ -1,0 +1,24 @@
+Section 7:
+----------
+
+What is CSS Grid?
+--------------------------------------------------
+A new module that brings two-dimensional grid systems to CSS.
+It replaces float layouts, using less and more readable CSS.
+CSS Grid and Flexbox work well together where Flexbox handles the one dimensional layouts.
+No need for Bootstrap grid definitions (i.e. column splits etc.)
+
+What is CSS Grid Terminology?
+--------------------------------------------------
+Like Flexbox, there is first a Grid Container. In order to create a grid container, you first
+set the 'display' property of an element to 'grid'. I.e
+    display: grid    OR     display: grid-inline
+
+All the direct children of the Grid Container are the Grid Items. The Y-axis defines the column
+axis and the X-axis defines the row axis. The axes can't be changed like you can in Flexbox.
+The lines that make up the grid are called the grid lines. They separate out the columns and rows
+and these are automatically numbered starting from 1.
+The actual space between the rows and columns is called the Gutter. The row gutter and the column
+gutter can differ in size.
+See "Section 7 - CSSGridDefinition.PNG"
+See "Section 7 - CSSGridProperties.PNG"

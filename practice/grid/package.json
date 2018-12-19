@@ -1,0 +1,14 @@
+{
+  "name": "CSSGridPractise",
+  "version": "1.0.0",
+  "description": "CSS Grid Practise",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass style.scss style.css"
+  },
+  "author": "Myran",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.9.0"
+  }
+}
